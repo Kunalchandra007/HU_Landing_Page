@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Test Page{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center">
+    <div class="text-center">
+        <h1 class="text-4xl font-bold mb-4">Test Page</h1>
+        <p class="text-gray-600 mb-8">This is a test page.</p>
+        <a href="{{ url_for('home') }}" class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">Go to Home</a>
+    </div>
+</div>
+{% endblock %}

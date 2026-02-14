@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Haridwar University{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Lora:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body class="bg-gray-100 text-gray-900 p-4 md:p-6 lg:p-8">
+    <!-- White Border Frame Container -->
+    <div class="bg-white shadow-2xl rounded-3xl overflow-hidden max-w-[1920px] mx-auto">
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        {% include 'footer.html' %}
+    </div>
+</body>
+
+</html>
