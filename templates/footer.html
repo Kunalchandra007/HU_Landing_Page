@@ -1,120 +1,99 @@
-<!-- Comprehensive Footer -->
-<footer class="bg-black text-gray-300 py-16">
-    <div class="max-w-7xl mx-auto px-6">
+<footer style="background: #1e3a5f; margin: 0; padding: 4rem 3rem 2rem;">
+    <div style="max-width: 1400px; margin: 0 auto;">
         <!-- Main Footer Content -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
-            <!-- Logo Section -->
-            <div class="lg:col-span-1">
-                <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Haridwar University" class="h-16 w-auto mb-4">
-                <div class="space-y-4 text-sm">
-                    <div>
-                        <h4 class="text-white font-semibold mb-2">ABOUT AMRITA</h4>
-                        <ul class="space-y-2">
-                            <li><a href="#" class="hover:text-white transition">Rankings</a></li>
-                            <li><a href="#" class="hover:text-white transition">Accreditation</a></li>
-                            <li><a href="#" class="hover:text-white transition">Leadership</a></li>
-                            <li><a href="#" class="hover:text-white transition">Press Media</a></li>
-                            <li><a href="#" class="hover:text-white transition">Governance</a></li>
-                        </ul>
-                    </div>
+        <div style="display: grid; grid-template-columns: 280px repeat(4, 1fr); gap: 4rem; margin-bottom: 3rem;">
+            
+            <!-- Logo and About Section -->
+            <div>
+                <div style="background: white; padding: 0.75rem; border-radius: 4px; display: inline-block; margin-bottom: 1.5rem;">
+                    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Haridwar University" style="height: 50px; display: block;">
                 </div>
-            </div>
-
-            <!-- Interest Section -->
-            <div>
-                <h4 class="text-white font-semibold mb-4 flex items-center">
-                    <span class="inline-block w-1 h-4 bg-blue-600 mr-2"></span>
-                    INTEREST
-                </h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Agriculture</a></li>
-                    <li><a href="#" class="hover:text-white transition">Commerce</a></li>
-                    <li><a href="#" class="hover:text-white transition">Architecture</a></li>
-                    <li><a href="#" class="hover:text-white transition">Artificial Intelligence</a></li>
-                    <li><a href="#" class="hover:text-white transition">Artificial Intelligence and Data Science</a></li>
-                    <li><a href="#" class="hover:text-white transition">Allied Health Sciences</a></li>
-                    <li><a href="#" class="hover:text-white transition">Ayurveda</a></li>
-                    <li><a href="#" class="hover:text-white transition">Cyber Security</a></li>
-                    <li><a href="#" class="hover:text-white transition">Business</a></li>
-                    <li><a href="#" class="hover:text-white transition">Computing</a></li>
-                    
-                    <li><a href="#" class="hover:text-white transition">Engineering</a></li>
-                    
-                    <li><a href="#" class="hover:text-white transition">Medicine</a></li>
-                    <li><a href="#" class="hover:text-white transition">Nursing</a></li>
-                    <li><a href="#" class="hover:text-white transition">Pharmacy</a></li>
-                    
-                    <button class="text-blue-600 hover:text-blue-400 transition mt-2 flex items-center">
-                        <span class="text-lg mr-1">+</span>
-                    </button>
+                <h4 style="color: white; font-weight: 600; margin-bottom: 1rem; font-size: 0.95rem; letter-spacing: 0.5px;">ABOUT Haridwar University</h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Rankings</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Accreditation</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Leadership</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Press Media</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Governance</li>
                 </ul>
             </div>
 
-            <!-- Research Section -->
+            <!-- Interest Column -->
             <div>
-                <h4 class="text-white font-semibold mb-4 flex items-center">
-                    <span class="inline-block w-1 h-4 bg-blue-600 mr-2"></span>
-                    RESEARCH
-                </h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Contors</a></li>
-                    <li><a href="#" class="hover:text-white transition">Google Scholar</a></li>
-                    <li><a href="#" class="hover:text-white transition">News</a></li>
-                    <li><a href="#" class="hover:text-white transition">Patents</a></li>
-                    <li><a href="#" class="hover:text-white transition">Projects</a></li>
-                    <li><a href="#" class="hover:text-white transition">Publications</a></li>
-                    <button class="text-blue-600 hover:text-blue-400 transition mt-2 flex items-center">
-                        <span class="text-lg mr-1">+</span> 
-                    </button>
+                <h4 style="color: white; font-weight: 600; margin-bottom: 1rem; font-size: 0.95rem; letter-spacing: 0.5px; border-left: 3px solid #22d3ee; padding-left: 0.75rem;">INTEREST</h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Agriculture</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Commerce</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Architecture</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Artificial Intelligence</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">AI and Data Science</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Allied Health Sciences</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Ayurveda</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Cyber Security</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Business</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Computing</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Engineering</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Medicine</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Nursing</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Pharmacy</li>
                 </ul>
             </div>
 
-            <!-- Quick Links Section -->
+            <!-- Research Column -->
             <div>
-                <h4 class="text-white font-semibold mb-4 flex items-center">
-                    <span class="inline-block w-1 h-4 bg-blue-600 mr-2"></span>
-                    QUICK LINKS
-                </h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Apply Now</a></li>
-                    <li><a href="#" class="hover:text-white transition">Maps & Direction</a></li>
-                    <li><a href="#" class="hover:text-white transition">Anti Ragging</a></li>
-                    <li><a href="#" class="hover:text-white transition">Outreach</a></li>
-                    <li><a href="#" class="hover:text-white transition">News</a></li>
-                    <li><a href="#" class="hover:text-white transition">Events</a></li>
-                    <li><a href="#" class="hover:text-white transition">Jobs</a></li>
-                    <li><a href="#" class="hover:text-white transition">Contact</a></li>
-                    <button class="text-blue-600 hover:text-blue-400 transition mt-2 flex items-center">
-                        <span class="text-lg mr-1">+</span>
-                    </button>
+                <h4 style="color: white; font-weight: 600; margin-bottom: 1rem; font-size: 0.95rem; letter-spacing: 0.5px; border-left: 3px solid #22d3ee; padding-left: 0.75rem;">RESEARCH</h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Centers</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Google Scholar</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">News</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Patents</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Projects</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Publications</li>
                 </ul>
             </div>
 
-            <!-- Programs Section -->
+            <!-- Quick Links Column -->
             <div>
-                <h4 class="text-white font-semibold mb-4 flex items-center">
-                    <span class="inline-block w-1 h-4 bg-blue-600 mr-2"></span>
-                    PROGRAMS
-                </h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Undergraduate</a></li>
-                    <li><a href="#" class="hover:text-white transition">Postgraduate</a></li>
-                    
-                    <li><a href="#" class="hover:text-white transition">International</a></li>
-                    <li><a href="#" class="hover:text-white transition">Certificate Courses</a></li>
-                    
+                <h4 style="color: white; font-weight: 600; margin-bottom: 1rem; font-size: 0.95rem; letter-spacing: 0.5px; border-left: 3px solid #22d3ee; padding-left: 0.75rem;">QUICK LINKS</h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Apply Now</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Maps & Direction</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Anti Ragging</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Outreach</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">News</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Events</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Jobs</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Contact</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Admin Login</li>
+                </ul>
+            </div>
+
+            <!-- Programs Column -->
+            <div>
+                <h4 style="color: white; font-weight: 600; margin-bottom: 1rem; font-size: 0.95rem; letter-spacing: 0.5px; border-left: 3px solid #22d3ee; padding-left: 0.75rem;">PROGRAMS</h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Undergraduate</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Postgraduate</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">International</li>
+                    <li style="margin-bottom: 0.6rem; color: #22d3ee; font-size: 0.9rem;">Certificate Courses</li>
                 </ul>
             </div>
         </div>
 
         <!-- Bottom Footer -->
-        <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between">
-            <p class="text-sm text-gray-400">&copy; 2026 Haridwar University. All rights reserved.</p>
-            <div class="flex gap-6 mt-4 md:mt-0">
-                <a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a>
-                <a href="#" class="text-gray-400 hover:text-white transition">Terms & Conditions</a>
-                <a href="#" class="text-gray-400 hover:text-white transition">Sitemap</a>
+        <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <p style="color: #9ca3af; font-size: 0.875rem; margin: 0;">&copy; 2026 Haridwar University. All rights reserved.</p>
+            <div style="display: flex; gap: 2rem; font-size: 0.875rem;">
+                <span style="color: #9ca3af;">Privacy Policy</span>
+                <span style="color: #9ca3af;">Terms & Conditions</span>
+                <span style="color: #9ca3af;">Sitemap</span>
             </div>
+            <a href="{{ url_for('admin_login') }}" style="display: inline-flex; align-items: center; gap: 0.5rem; background: #22c55e !important; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: bold; text-decoration: none; font-size: 0.875rem; box-shadow: none; transition: all 0.3s ease; white-space: nowrap;">
+                <svg xmlns="http://www.w3.org/2000/svg" style="height: 1.25rem; width: 1.25rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                Admin Login
+            </a>
         </div>
     </div>
 </footer>

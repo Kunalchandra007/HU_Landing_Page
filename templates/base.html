@@ -3,7 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Haridwar University - Empowering Future Leaders through Innovation and Excellence">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Haridwar University">
+    <meta name="format-detection" content="telephone=no">
     <title>{% block title %}Haridwar University{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -14,16 +20,57 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Lora:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+        /* Mobile-first responsive utilities */
+        @media (max-width: 479px) {
+            body {
+                font-size: 14px;
+            }
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100 text-gray-900 p-4 md:p-6 lg:p-8">
+<body class="bg-gray-100 text-gray-900 p-2 sm:p-4 md:p-6 lg:p-8">
     <!-- White Border Frame Container -->
-    <div class="bg-white shadow-2xl rounded-3xl overflow-hidden max-w-[1920px] mx-auto">
+    <div class="bg-white shadow-2xl rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden max-w-[1920px] mx-auto">
         <main>
             {% block content %}{% endblock %}
         </main>
-        {% include 'footer.html' %}
     </div>
+    
+    {% include 'footer.html' %}
+    
+    <!-- Responsive Script -->
+    <script>
+        // Detect touch capability
+        const isTouchDevice = () => {
+            return (('ontouchstart' in window) ||
+                    (navigator.maxTouchPoints > 0) ||
+                    (navigator.msMaxTouchPoints > 0));
+        };
+
+        // Add touch class to body
+        if (isTouchDevice()) {
+            document.body.classList.add('touch-device');
+        }
+
+        // Smooth scroll support
+        if ('scrollBehavior' in document.documentElement.style === false) {
+            document.documentElement.style.scrollBehavior = 'auto';
+        }
+
+        // Viewport height fix for mobile browsers
+        const updateVH = () => {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', vh + 'px');
+        };
+        updateVH();
+        window.addEventListener('resize', updateVH);
+        window.addEventListener('orientationchange', updateVH);
+    </script>
 </body>
 
 </html>

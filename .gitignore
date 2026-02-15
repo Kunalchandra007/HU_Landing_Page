@@ -9,3 +9,6 @@ ENV/
 instance/
 .env
 *.log
+university.db
+static/uploads/events/*
+!static/uploads/events/.gitkeep

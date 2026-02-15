@@ -5,47 +5,45 @@
 {% block content %}
 <!-- Hero Section -->
 <section
-    class="hero-section min-h-screen flex items-center justify-between px-6 md:px-12 lg:px-20 relative overflow-hidden">
+    class="hero-section min-h-screen flex items-center justify-start px-4 sm:px-6 md:px-12 lg:px-20 relative overflow-hidden">
 
     <!-- Video Background -->
     <div class="video-background">
         <iframe 
-            src="https://www.youtube.com/embed/blzl5ee5GSU?autoplay=1&mute=1&loop=1&playlist=blzl5ee5GSU&controls=0" 
+            src="https://www.youtube.com/embed/blzl5ee5GSU?autoplay=1&mute=1&loop=1&playlist=blzl5ee5GSU&controls=0&modestbranding=1&fs=0" 
             allow="autoplay; muted">
         </iframe>
     </div>
 
     <!-- Logo -->
-    <div class="absolute top-6 left-6 md:top-8 md:left-12 lg:left-20 z-10">
+    <div class="absolute top-4 sm:top-6 md:top-8 left-4 sm:left-6 md:left-12 lg:left-20 z-10">
         <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="Haridwar University Logo"
-            class="h-16 md:h-20 lg:h-24 w-auto rounded-md shadow-xl">
+            class="h-10 sm:h-12 md:h-16 lg:h-20 xl:h-24 w-auto rounded-md shadow-xl">
     </div>
 
     <!-- Top Right Buttons -->
-    <div class="absolute top-3 right-6 md:top-4 md:right-8 lg:right-10 z-10 flex gap-3">
+    <div class="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-4 md:right-8 lg:right-10 z-10 flex flex-col sm:flex-row flex-wrap gap-1.5 sm:gap-2 md:gap-3 justify-end items-end">
         <a href="#about"
-            class="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-blue-600 px-4 md:px-6 py-2 md:py-3 rounded-full text-sm md:text-base font-semibold transition transform hover:scale-105 shadow-lg">
+            class="inline-flex items-center justify-center gap-1 sm:gap-2 bg-white hover:bg-gray-100 text-blue-600 px-2.5 sm:px-3 md:px-4 lg:px-6 py-1.5 sm:py-2 md:py-2.5 lg:py-3 rounded-full text-xs sm:text-sm md:text-base font-semibold transition shadow-lg whitespace-nowrap">
             About Us
         </a>
         <a href="#programs"
-            class="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-blue-600 px-4 md:px-6 py-2 md:py-3 rounded-full text-sm md:text-base font-semibold transition transform hover:scale-105 shadow-lg">
+            class="inline-flex items-center justify-center gap-1 sm:gap-2 bg-white hover:bg-gray-100 text-blue-600 px-2.5 sm:px-3 md:px-4 lg:px-6 py-1.5 sm:py-2 md:py-2.5 lg:py-3 rounded-full text-xs sm:text-sm md:text-base font-semibold transition shadow-lg whitespace-nowrap">
             Programs
         </a>
-        <a href="{{ url_for('contact') }}"
-            class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 md:px-6 py-2 md:py-3 rounded-full text-sm md:text-base font-semibold transition transform hover:scale-105 shadow-lg">
+        <a href="https://huroorkee.ac.in/apply-now"
+            class="inline-flex items-center justify-center gap-1 sm:gap-2 bg-blue-600 hover:bg-blue-700 text-white px-2.5 sm:px-3 md:px-4 lg:px-6 py-1.5 sm:py-2 md:py-2.5 lg:py-3 rounded-full text-xs sm:text-sm md:text-base font-semibold transition shadow-lg whitespace-nowrap">
             Register Now
         </a>
     </div>
 
-    <div class="hero-content max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
-        <div class="text-white">
-            <h1 class="text-6xl md:text-8xl font-black mb-6 leading-tight drop-shadow-2xl">ADMISSIONS 2026 OPEN </h1>
-            <p class="text-xl md:text-2xl mb-8 text-white max-w-xl drop-shadow-lg">Join Haridwar University's programs,
-                where
-                innovation, technology, and values unite to shape a better tomorrow for all.</p>
-            <a href="{{ url_for('contact') }}"
-                class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold transition transform hover:scale-105 shadow-xl">
-                <span class="text-2xl">+</span> Apply Now
+    <div class="relative z-10 w-full max-w-7xl" style="margin-left: 0; padding-left: 0;">
+        <div class="text-white w-full md:w-1/2" style="text-align: left;">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black mb-4 md:mb-6 leading-tight drop-shadow-2xl">ADMISSIONS 2026 OPEN</h1>
+            <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-6 md:mb-8 text-white max-w-xl drop-shadow-lg">Join Haridwar University's programs, where innovation, technology, and values unite to shape a better tomorrow for all.</p>
+            <a href="https://huroorkee.ac.in/apply-now"
+                class="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base font-bold transition transform hover:scale-105 shadow-xl">
+                <span class="text-xl sm:text-2xl">+</span> Apply Now
             </a>
         </div>
     </div>
@@ -57,65 +55,160 @@
 
 <!-- About Section with Stats -->
 <section id="about" class="section-padding" style="background: #ffffff;">
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-        <div class="text-white">
-            <h2 class="text-4xl md:text-6xl font-black mb-6 leading-tight text-black university-heading">Ignite the
-                Intellect. Lead the
-                Legacy.</h2>
-            <p class="text-black university-description">Haridwar University is a multi-disciplinary,
-                research-intensive, private university, educating a vibrant and innovative student and very strong
-                supportive faculty members. Haridwar University offers UG and PG programs across various disciplines,
-                including Engineering, Management, Medical Sciences, Life Sciences, Agricultural Sciences.</p>
-            <a href="#programs"
-                class="inline-flex items-center gap-2 text-black font-semibold mt-6 hover:gap-4 transition-all hover:text-blue-600">
-                <span>↗</span> Know More
-            </a>
-        </div>
-        <div class="grid grid-cols-2 gap-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+            <div class="text-center md:text-left">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-4 md:mb-6 leading-tight text-black university-heading">Ignite the Intellect. Lead the Legacy.</h2>
+                <p class="text-sm sm:text-base md:text-lg text-black university-description mb-4 md:mb-6">Haridwar University is a multi-disciplinary,
+                    research-intensive, private university, educating a vibrant and innovative student and very strong
+                    supportive faculty members. Haridwar University offers UG and PG programs across various disciplines,
+                    including Engineering, Management, Medical Sciences, Life Sciences, Agricultural Sciences.</p>
+                <a href="#programs"
+                    class="inline-flex items-center gap-2 text-black font-semibold hover:gap-4 transition-all hover:text-blue-600 text-sm sm:text-base">
+                    <span>↗</span> Know More
+                </a>
+            </div>
+            <div class="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6">
             <div
-                class="group bg-gradient-to-br from-gray-900 to-black border-2 border-gray-800 rounded-3xl relative overflow-hidden h-80 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-purple-600">
+                class="group bg-gradient-to-br from-gray-900 to-black border-2 border-gray-800 rounded-xl md:rounded-2xl lg:rounded-3xl relative overflow-hidden h-40 sm:h-48 md:h-64 lg:h-80 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-purple-600">
                 <img src="{{ url_for('static', filename='images/herosection.webp') }}" alt="Research Projects"
                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
-                <div class="absolute bottom-6 left-6 right-6">
-                    <div class="text-5xl font-black text-white mb-2 drop-shadow-lg">50+</div>
-                    <div class="text-gray-100 font-semibold text-lg">Research Projects</div>
+                <div class="absolute bottom-2 sm:bottom-3 md:bottom-4 lg:bottom-6 left-2 sm:left-3 md:left-4 lg:left-6 right-2 sm:right-3 md:right-4 lg:right-6">
+                    <div class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white mb-1 md:mb-2 drop-shadow-lg">50+</div>
+                    <div class="text-gray-100 font-semibold text-xs sm:text-sm md:text-base lg:text-lg">Research Projects</div>
                 </div>
             </div>
             <div
-                class="group bg-gradient-to-br from-gray-900 to-black border-2 border-gray-800 rounded-3xl p-8 relative overflow-hidden h-80 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-blue-600">
+                class="group bg-gradient-to-br from-gray-900 to-black border-2 border-gray-800 rounded-xl md:rounded-2xl lg:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 relative overflow-hidden h-40 sm:h-48 md:h-64 lg:h-80 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-blue-600">
                 <div
-                    class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-600/30 to-transparent rounded-full blur-3xl">
+                    class="absolute top-0 right-0 w-24 sm:w-32 md:w-40 h-24 sm:h-32 md:h-40 bg-gradient-to-br from-blue-600/30 to-transparent rounded-full blur-3xl">
                 </div>
                 <div class="relative h-full flex flex-col justify-between">
                     <div>
-                        <div class="text-6xl font-black text-white mb-3 drop-shadow-lg">140+</div>
-                        <div class="text-gray-300 font-semibold text-lg">Publications</div>
+                        <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-1 sm:mb-2 md:mb-3 drop-shadow-lg">140+</div>
+                        <div class="text-gray-300 font-semibold text-xs sm:text-sm md:text-base lg:text-lg">Publications</div>
                     </div>
-                    <div class="mt-6">
+                    <div class="mt-2 sm:mt-4 md:mt-6">
                         <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300" alt="Publications"
-                            class="w-28 h-28 object-cover rounded-xl opacity-70 group-hover:opacity-90 transition-opacity">
+                            class="w-16 sm:w-20 md:w-24 lg:w-28 h-16 sm:h-20 md:h-24 lg:h-28 object-cover rounded-xl opacity-70 group-hover:opacity-90 transition-opacity">
                     </div>
                 </div>
             </div>
             <div
-                class="group bg-gradient-to-br from-gray-900 to-black border-2 border-gray-800 rounded-3xl relative overflow-hidden h-80 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-orange-600">
+                class="group bg-gradient-to-br from-gray-900 to-black border-2 border-gray-800 rounded-xl md:rounded-2xl lg:rounded-3xl relative overflow-hidden h-40 sm:h-48 md:h-64 lg:h-80 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-orange-600">
                 <img src="{{ url_for('static', filename='images/toy.avif') }}" alt="Patents"
                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
-                <div class="absolute bottom-6 left-6 right-6">
-                    <div class="text-5xl font-black text-white mb-2 drop-shadow-lg">10+</div>
-                    <div class="text-gray-100 font-semibold text-lg">Patents</div>
+                <div class="absolute bottom-2 sm:bottom-3 md:bottom-4 lg:bottom-6 left-2 sm:left-3 md:left-4 lg:left-6 right-2 sm:right-3 md:right-4 lg:right-6">
+                    <div class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white mb-1 md:mb-2 drop-shadow-lg">10+</div>
+                    <div class="text-gray-100 font-semibold text-xs sm:text-sm md:text-base lg:text-lg">Patents</div>
                 </div>
             </div>
             <div
-                class="group bg-white rounded-3xl p-8 relative overflow-hidden h-80 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-gray-200 hover:border-blue-600">
+                class="group bg-white rounded-xl md:rounded-2xl lg:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 relative overflow-hidden h-40 sm:h-48 md:h-64 lg:h-80 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-gray-200 hover:border-blue-600">
                 <div class="relative h-full flex flex-col justify-between">
-                    <div class="text-3xl font-black text-black mb-3 leading-tight">WORLD RECOGNIZED RESEARCH AND
-                        INNOVATION</div>
-                    <div class="mt-6">
+                    <div class="text-base sm:text-lg md:text-2xl lg:text-3xl font-black text-black mb-2 md:mb-3 leading-tight">WORLD RECOGNIZED RESEARCH AND INNOVATION</div>
+                    <div class="mt-2 sm:mt-4 md:mt-6">
                         <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=300" alt="Innovation"
-                            class="w-24 h-24 object-cover rounded-xl group-hover:scale-110 transition-transform">
+                            class="w-12 sm:w-16 md:w-20 lg:w-24 h-12 sm:h-16 md:h-20 lg:h-24 object-cover rounded-xl group-hover:scale-110 transition-transform">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- University Info & Accreditations Section -->
+<section class="section-padding university-info-section" style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #1e3a8a 100%); position: relative; overflow: hidden;">
+    <!-- Decorative circles -->
+    <div style="position: absolute; top: -100px; left: -100px; width: 300px; height: 300px; border: 2px solid rgba(255,255,255,0.1); border-radius: 50%;"></div>
+    <div style="position: absolute; top: 50px; right: -50px; width: 200px; height: 200px; border: 2px solid rgba(255,255,255,0.1); border-radius: 50%;"></div>
+    <div style="position: absolute; bottom: -50px; left: 30%; width: 150px; height: 150px; border: 2px solid rgba(255,255,255,0.1); border-radius: 50%;"></div>
+    
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <!-- Left Side - University Info -->
+            <div class="text-white relative z-10">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">
+                    Haridwar University<br>
+                    <span class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black">Uttarakhand</span>
+                </h2>
+                <div class="w-20 h-1 bg-green-400 mb-6"></div>
+                
+                <p class="text-lg sm:text-xl md:text-2xl font-semibold mb-6">Enlightening Minds, Empowering Futures</p>
+                
+                <p class="text-sm sm:text-base md:text-lg mb-8 leading-relaxed opacity-90 max-w-xl">
+                    Welcome to Haridwar University, the epitome of academic excellence nestled in the serene landscapes of Uttarakhand. As the premier educational institution in the region, we take pride in offering world-class education, innovative research opportunities, and a vibrant campus life.
+                </p>
+                
+                <!-- Rankings -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                    <div class="ranking-card">
+                        <div class="text-4xl sm:text-5xl md:text-6xl font-black text-green-400 mb-2">Ranked 37th</div>
+                        <p class="text-xs sm:text-sm opacity-90">in Top Placement Universities by TIMES OF INDIA Ranking Survey 2024</p>
+                    </div>
+                    <div class="ranking-card">
+                        <div class="text-4xl sm:text-5xl md:text-6xl font-black text-green-400 mb-2">Ranked 59th</div>
+                        <p class="text-xs sm:text-sm opacity-90">in Top India's Best Universities by THE WEEK Ranking Survey 2025.</p>
+                    </div>
+                </div>
+
+                <a href="https://huroorkee.ac.in/about-us" class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base font-bold transition transform hover:scale-105 shadow-xl">
+                    Know More <span class="text-lg">→</span>
+                </a>
+            </div>
+
+            <!-- Right Side - Approvals & Accreditations -->
+            <div class="relative z-10">
+                <div class="bg-white/5 backdrop-blur-md rounded-3xl p-6 sm:p-8 md:p-10 border border-white/10">
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-8 text-center">Approvals & Accreditations</h3>
+                    
+                    <!-- 2x3 Grid -->
+                    <div class="grid grid-cols-3 gap-4 sm:gap-5 md:gap-6">
+                        <!-- Row 1 -->
+                        <!-- UGC -->
+                        <div class="accreditation-box">
+                            <div class="accreditation-inner">
+                                <img src="{{ url_for('static', filename='images/ugc.png') }}" alt="UGC" class="accreditation-logo">
+                            </div>
+                        </div>
+                        
+                        <!-- AICTE -->
+                        <div class="accreditation-box">
+                            <div class="accreditation-inner">
+                                <img src="{{ url_for('static', filename='images/Aicte.jpeg') }}" alt="AICTE" class="accreditation-logo">
+                            </div>
+                        </div>
+                        
+                        <!-- NBA -->
+                        <div class="accreditation-box">
+                            <div class="accreditation-inner">
+                                <img src="{{ url_for('static', filename='images/NBA.jpeg') }}" alt="NBA" class="accreditation-logo">
+                            </div>
+                        </div>
+                        
+                        <!-- Row 2 -->
+                        <!-- Association -->
+                        <div class="accreditation-box">
+                            <div class="accreditation-inner">
+                                <img src="{{ url_for('static', filename='images/hulogo.jpeg') }}" alt="Association" class="accreditation-logo">
+                            </div>
+                        </div>
+                        
+                        <!-- CII -->
+                        <div class="accreditation-box">
+                            <div class="accreditation-inner">
+                                <img src="{{ url_for('static', filename='images/CII.jpeg') }}" alt="CII" class="accreditation-logo">
+                            </div>
+                        </div>
+                        
+                        <!-- ASSOCHAM -->
+                        <div class="accreditation-box">
+                            <div class="accreditation-inner">
+                                <img src="{{ url_for('static', filename='images/Assocham.png') }}" alt="ASSOCHAM" class="accreditation-logo">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -126,73 +219,68 @@
 <!-- Programs Section -->
 <section id="programs" class="section-padding bg-white">
     <div class="max-w-7xl mx-auto">
-        <div class="flex justify-between items-center mb-12">
-            <h2 class="text-4xl md:text-6xl font-black text-black">WHAT'S YOUR INTEREST?</h2>
-            <a href="{{ url_for('contact') }}"
-                class="px-6 py-3 bg-black text-white rounded-full font-semibold hover:bg-gray-800 transition">Apply
-                Now</a>
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 mb-6 sm:mb-8 md:mb-12">
+            <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-black text-black">WHAT'S YOUR INTEREST?</h2>
+            <a href="https://huroorkee.ac.in/apply-now"
+                class="px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-black text-white rounded-full text-xs sm:text-sm md:text-base font-semibold hover:bg-gray-800 transition whitespace-nowrap">Apply Now</a>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            <div
-                class="program-card bg-gradient-to-br from-green-50 to-green-100 hover:from-green-100 hover:to-green-200">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
+            <a href="https://huroorkee.ac.in/academics/guidelines-and-policy/ug-pg-program" target="_blank" class="program-card bg-gradient-to-br from-green-50 to-green-100 hover:from-green-100 hover:to-green-200">
                 <div class="program-icon" style="background: #22c55e;">🌾</div>
                 <div class="program-name text-black">Agriculture</div>
-            </div>
-            <div class="program-card bg-gradient-to-br from-pink-50 to-pink-100 hover:from-pink-100 hover:to-pink-200">
+            </a>
+            <a href="https://huroorkee.ac.in/academics/guidelines-and-policy/ug-pg-program" target="_blank" class="program-card bg-gradient-to-br from-pink-50 to-pink-100 hover:from-pink-100 hover:to-pink-200">
                 <div class="program-icon" style="background: #ec4899;">🎨</div>
                 <div class="program-name text-black">Commerce</div>
-            </div>
-            <div class="program-card bg-gradient-to-br from-gray-50 to-gray-100 hover:from-gray-100 hover:to-gray-200">
+            </a>
+            <a href="https://huroorkee.ac.in/academics/guidelines-and-policy/ug-pg-program" target="_blank" class="program-card bg-gradient-to-br from-gray-50 to-gray-100 hover:from-gray-100 hover:to-gray-200">
                 <div class="program-icon" style="background: #6b7280;">🏛️</div>
                 <div class="program-name text-black">Architecture</div>
-            </div>
-            <div class="program-card bg-gradient-to-br from-cyan-50 to-cyan-100 hover:from-cyan-100 hover:to-cyan-200">
+            </a>
+            <a href="https://huroorkee.ac.in/academics/guidelines-and-policy/ug-pg-program" target="_blank" class="program-card bg-gradient-to-br from-cyan-50 to-cyan-100 hover:from-cyan-100 hover:to-cyan-200">
                 <div class="program-icon" style="background: #06b6d4;">🤖</div>
                 <div class="program-name text-black">Artificial Intelligence</div>
-            </div>
-            <div class="program-card bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200">
+            </a>
+            <a href="https://huroorkee.ac.in/academics/guidelines-and-policy/ug-pg-program" target="_blank" class="program-card bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200">
                 <div class="program-icon" style="background: #3b82f6;">⚕️</div>
                 <div class="program-name text-black">Allied Health Sciences</div>
-            </div>
+            </a>
 
-            <div
-                class="program-card bg-gradient-to-br from-purple-50 to-purple-100 hover:from-purple-100 hover:to-purple-200">
+            <a href="https://huroorkee.ac.in/academics/guidelines-and-policy/ug-pg-program" target="_blank" class="program-card bg-gradient-to-br from-purple-50 to-purple-100 hover:from-purple-100 hover:to-purple-200">
                 <div class="program-icon" style="background: #a855f7;">🧬</div>
                 <div class="program-name text-black">Data Science</div>
-            </div>
-            <div class="program-card bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200">
+            </a>
+            <a href="https://huroorkee.ac.in/academics/guidelines-and-policy/ug-pg-program" target="_blank" class="program-card bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200">
                 <div class="program-icon" style="background: #2563eb;">💼</div>
                 <div class="program-name text-black">Business</div>
-            </div>
-            <div class="program-card bg-gradient-to-br from-gray-50 to-gray-100 hover:from-gray-100 hover:to-gray-200">
+            </a>
+            <a href="https://huroorkee.ac.in/academics/guidelines-and-policy/ug-pg-program" target="_blank" class="program-card bg-gradient-to-br from-gray-50 to-gray-100 hover:from-gray-100 hover:to-gray-200">
                 <div class="program-icon" style="background: #1f2937;">💻</div>
                 <div class="program-name text-black">Computing</div>
-            </div>
+            </a>
 
-            <div
-                class="program-card bg-gradient-to-br from-slate-50 to-slate-100 hover:from-slate-100 hover:to-slate-200">
+            <a href="https://huroorkee.ac.in/academics/guidelines-and-policy/ug-pg-program" target="_blank" class="program-card bg-gradient-to-br from-slate-50 to-slate-100 hover:from-slate-100 hover:to-slate-200">
                 <div class="program-icon" style="background: #475569;">⚙️</div>
                 <div class="program-name text-black">Engineering</div>
-            </div>
+            </a>
 
 
-            <div class="program-card bg-gradient-to-br from-red-50 to-red-100 hover:from-red-100 hover:to-red-200">
+            <a href="https://huroorkee.ac.in/academics/guidelines-and-policy/ug-pg-program" target="_blank" class="program-card bg-gradient-to-br from-red-50 to-red-100 hover:from-red-100 hover:to-red-200">
                 <div class="program-icon" style="background: #ef4444;">💊</div>
                 <div class="program-name text-black">Medicine</div>
-            </div>
-            <div class="program-card bg-gradient-to-br from-teal-50 to-teal-100 hover:from-teal-100 hover:to-teal-200">
+            </a>
+            <a href="https://huroorkee.ac.in/academics/guidelines-and-policy/ug-pg-program" target="_blank" class="program-card bg-gradient-to-br from-teal-50 to-teal-100 hover:from-teal-100 hover:to-teal-200">
                 <div class="program-icon" style="background: #14b8a6;">🩺</div>
                 <div class="program-name text-black">Nursing</div>
-            </div>
-            <div class="program-card bg-gradient-to-br from-cyan-50 to-cyan-100 hover:from-cyan-100 hover:to-cyan-200">
+            </a>
+            <a href="https://huroorkee.ac.in/academics/guidelines-and-policy/ug-pg-program" target="_blank" class="program-card bg-gradient-to-br from-cyan-50 to-cyan-100 hover:from-cyan-100 hover:to-cyan-200">
                 <div class="program-icon" style="background: #0891b2;">💊</div>
                 <div class="program-name text-black">Pharmacy</div>
-            </div>
-            <div
-                class="program-card bg-gradient-to-br from-violet-50 to-violet-100 hover:from-violet-100 hover:to-violet-200">
+            </a>
+            <a href="https://huroorkee.ac.in/academics/guidelines-and-policy/ug-pg-program" target="_blank" class="program-card bg-gradient-to-br from-violet-50 to-violet-100 hover:from-violet-100 hover:to-violet-200">
                 <div class="program-icon" style="background: #7c3aed;">🔬</div>
                 <div class="program-name text-black">Physical Sciences</div>
-            </div>
+            </a>
 
 
 
@@ -203,76 +291,176 @@
 <!-- Academic Departments Section -->
 <section class="section-padding bg-gray-50">
     <div class="max-w-7xl mx-auto">
-        <h2 class="text-4xl md:text-5xl font-black mb-12 text-gray-900">Academic Departments</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-8 md:mb-12 text-gray-900">Academic Departments</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             <!-- Department 1 -->
             <div
-                class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                class="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                 <img src="{{ url_for('static', filename='images/Roorkee-College-of-Smart-Computing.avif') }}"
-                    alt="Smart Computing" class="w-full h-48 object-cover">
-                <div class="p-6 text-center">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Roorkee College of Smart Computing</h3>
+                    alt="Smart Computing" class="w-full h-40 sm:h-48 object-cover">
+                <div class="p-4 sm:p-6 text-center">
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">Roorkee College of Smart Computing</h3>
                     <a href="https://huroorkee.ac.in/academics/programs/roorkee-college-of-smart-computing"
                         target="_blank"
-                        class="inline-block px-4 py-1.5 text-sm bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition">Visit
-                        Department</a>
+                        class="inline-block px-3 sm:px-4 py-1.5 text-xs sm:text-sm bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition">Visit Department</a>
                 </div>
             </div>
 
             <!-- Department 2 -->
             <div
-                class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                class="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                 <img src="{{ url_for('static', filename='images/Why_Roorkee_College_of_Engineering.avif') }}"
-                    alt="Engineering" class="w-full h-48 object-cover">
-                <div class="p-6 text-center">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Roorkee College of Engineering</h3>
+                    alt="Engineering" class="w-full h-40 sm:h-48 object-cover">
+                <div class="p-4 sm:p-6 text-center">
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">Roorkee College of Engineering</h3>
                     <a href="https://huroorkee.ac.in/academics/programs/roorkee-college-of-engineering" target="_blank"
-                        class="inline-block px-4 py-1.5 text-sm bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition">Visit
-                        Department</a>
+                        class="inline-block px-3 sm:px-4 py-1.5 text-xs sm:text-sm bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition">Visit Department</a>
                 </div>
             </div>
 
             <!-- Department 3 -->
             <div
-                class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                class="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                 <img src="{{ url_for('static', filename='images/business_studies1.avif') }}" alt="Business Studies"
-                    class="w-full h-48 object-cover">
-                <div class="p-6 text-center">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Roorkee College of Business Studies</h3>
+                    class="w-full h-40 sm:h-48 object-cover">
+                <div class="p-4 sm:p-6 text-center">
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">Roorkee College of Business Studies</h3>
                     <a href="https://huroorkee.ac.in/academics/programs/roorkee-college-of-business-studies"
                         target="_blank"
-                        class="inline-block px-4 py-1.5 text-sm bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition">Visit
-                        Department</a>
+                        class="inline-block px-3 sm:px-4 py-1.5 text-xs sm:text-sm bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition">Visit Department</a>
                 </div>
             </div>
 
             <!-- Department 4 -->
             <div
-                class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                class="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                 <img src="{{ url_for('static', filename='images/young-asian-indian-college-students-2025-03-14-03-09-58-utc.avif') }}"
-                    alt="Agriculture Sciences" class="w-full h-48 object-cover">
-                <div class="p-6 text-center">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Roorkee College of Agriculture Sciences</h3>
+                    alt="Agriculture Sciences" class="w-full h-40 sm:h-48 object-cover">
+                <div class="p-4 sm:p-6 text-center">
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">Roorkee College of Agriculture Sciences</h3>
                     <a href="https://huroorkee.ac.in/academics/programs/roorkee-college-of-agriculture-sciences"
                         target="_blank"
-                        class="inline-block px-4 py-1.5 text-sm bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition">Visit
-                        Department</a>
+                        class="inline-block px-3 sm:px-4 py-1.5 text-xs sm:text-sm bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition">Visit Department</a>
                 </div>
             </div>
 
             <!-- Department 5 -->
             <div
-                class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                class="bg-white rounded-xl md:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                 <img src="{{ url_for('static', filename='images/SmartComputing.avif') }}" alt="Allied Health Sciences"
-                    class="w-full h-48 object-cover">
-                <div class="p-6 text-center">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">Roorkee College of Allied Health Sciences</h3>
+                    class="w-full h-40 sm:h-48 object-cover">
+                <div class="p-4 sm:p-6 text-center">
+                    <h3 class="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-3 md:mb-4">Roorkee College of Allied Health Sciences</h3>
                     <a href="https://huroorkee.ac.in/academics/programs/roorkee-college-of-allied-health-sciences"
                         target="_blank"
-                        class="inline-block px-4 py-1.5 text-sm bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition">Visit
-                        Department</a>
+                        class="inline-block px-3 sm:px-4 py-1.5 text-xs sm:text-sm bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition">Visit Department</a>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sports Gallery Section -->
+<section class="section-padding bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-8 md:mb-12 text-center" style="color: #1e3a8a;">Sports Gallery</h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
+            <!-- Basketball Court -->
+            <a href="https://huroorkee.ac.in/student-corner/sports" target="_blank" class="sports-gallery-card group">
+                <div class="sports-gallery-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=500&q=80" 
+                         alt="University Basketball Court" 
+                         class="sports-gallery-image">
+                </div>
+                <div class="sports-gallery-caption">
+                    <p class="text-sm sm:text-base font-semibold text-gray-800">University Basketball Court</p>
+                </div>
+            </a>
+
+            <!-- Cricket Tournament -->
+            <a href="https://huroorkee.ac.in/student-corner/sports" target="_blank" class="sports-gallery-card group">
+                <div class="sports-gallery-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=500&q=80" 
+                         alt="Annual Cricket Tournament" 
+                         class="sports-gallery-image">
+                </div>
+                <div class="sports-gallery-caption">
+                    <p class="text-sm sm:text-base font-semibold text-gray-800">Annual Cricket Tournament</p>
+                </div>
+            </a>
+
+            <!-- Football Field -->
+            <a href="https://huroorkee.ac.in/student-corner/sports" target="_blank" class="sports-gallery-card group">
+                <div class="sports-gallery-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=500&q=80" 
+                         alt="Football Field" 
+                         class="sports-gallery-image">
+                </div>
+                <div class="sports-gallery-caption">
+                    <p class="text-sm sm:text-base font-semibold text-gray-800">Football Field</p>
+                </div>
+            </a>
+
+            <!-- Sports Carnival -->
+            <a href="https://huroorkee.ac.in/student-corner/sports" target="_blank" class="sports-gallery-card group">
+                <div class="sports-gallery-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=500&q=80" 
+                         alt="Sports Carnival 2023" 
+                         class="sports-gallery-image">
+                </div>
+                <div class="sports-gallery-caption">
+                    <p class="text-sm sm:text-base font-semibold text-gray-800">Sports Carnival 2023</p>
+                </div>
+            </a>
+
+            <!-- Table Tennis -->
+            <a href="https://huroorkee.ac.in/student-corner/sports" target="_blank" class="sports-gallery-card group">
+                <div class="sports-gallery-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1534158914592-062992fbe900?w=500&q=80" 
+                         alt="Indoor Table Tennis Facility" 
+                         class="sports-gallery-image">
+                </div>
+                <div class="sports-gallery-caption">
+                    <p class="text-sm sm:text-base font-semibold text-gray-800">Indoor Table Tennis Facility</p>
+                </div>
+            </a>
+
+            <!-- Gymnasium -->
+            <a href="https://huroorkee.ac.in/student-corner/sports" target="_blank" class="sports-gallery-card group">
+                <div class="sports-gallery-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500&q=80" 
+                         alt="Modern Gymnasium" 
+                         class="sports-gallery-image">
+                </div>
+                <div class="sports-gallery-caption">
+                    <p class="text-sm sm:text-base font-semibold text-gray-800">Modern Gymnasium</p>
+                </div>
+            </a>
+
+            <!-- Volleyball -->
+            <a href="https://huroorkee.ac.in/student-corner/sports" target="_blank" class="sports-gallery-card group">
+                <div class="sports-gallery-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=500&q=80" 
+                         alt="Volleyball Tournament" 
+                         class="sports-gallery-image">
+                </div>
+                <div class="sports-gallery-caption">
+                    <p class="text-sm sm:text-base font-semibold text-gray-800">Volleyball Tournament</p>
+                </div>
+            </a>
+
+            <!-- Badminton -->
+            <a href="https://huroorkee.ac.in/student-corner/sports" target="_blank" class="sports-gallery-card group">
+                <div class="sports-gallery-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=500&q=80" 
+                         alt="Indoor Badminton Court" 
+                         class="sports-gallery-image">
+                </div>
+                <div class="sports-gallery-caption">
+                    <p class="text-sm sm:text-base font-semibold text-gray-800">Indoor Badminton Court</p>
+                </div>
+            </a>
         </div>
     </div>
 </section>
@@ -280,298 +468,154 @@
 <!-- Happenings Section -->
 <section class="section-padding bg-white">
     <div class="max-w-7xl mx-auto">
-        <h2 class="text-4xl md:text-6xl font-black mb-12 text-black">HAPPENINGS AT HARIDWAR UNIVERSITY</h2>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-8 md:mb-12 text-black">HAPPENINGS AT HARIDWAR UNIVERSITY</h2>
+        {% if happenings %}
         <!-- Swiper for Happenings Cards -->
         <div class="swiper happeningsSwiper mb-8">
             <div class="swiper-wrapper">
+                {% for happening in happenings %}
                 <div class="swiper-slide">
-                    <div class="card group cursor-pointer">
+                    <div class="card group">
                         <div class="relative">
-                            <!-- Swiper for Placement Images -->
-                            <div class="swiper placementSwiper">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <img src="{{ url_for('static', filename='images/1770965055261.jpeg') }}"
-                                            alt="Placement Drive" class="card-image">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ url_for('static', filename='images/1770965055534.jpeg') }}"
-                                            alt="Placement Drive" class="card-image">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ url_for('static', filename='images/1770965055271.jpeg') }}"
-                                            alt="Placement Drive" class="card-image">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ url_for('static', filename='images/1770965054803.jpeg') }}"
-                                            alt="Placement Drive" class="card-image">
-                                    </div>
-                                </div>
-                                <div class="swiper-pagination"></div>
-                            </div>
+                            <img src="{{ url_for('static', filename=happening.image_path) }}"
+                                alt="{{ happening.title }}" class="card-image">
                         </div>
                         <div class="card-content">
-                            <h3 class="card-title text-lg font-bold mb-2">Campus Placement Drive by ROVO AUTOMATIONS
-                            </h3>
-                            <p class="card-description">Haridwar University, Roorkee proudly hosted a Campus Placement
-                                Drive by
-                                ROVO Automation offering students a valuable opportunity to begin their professional
-                                journey
-                                with a global organization. The recruitment process witnessed enthusiastic participation
-                                from
-                                students across various disciplines.</p>
+                            <h3 class="card-title text-lg font-bold mb-2">{{ happening.title }}</h3>
+                            <p class="card-description">{{ happening.description }}</p>
                         </div>
                     </div>
                 </div>
-                <div class="swiper-slide">
-                    <div class="card group cursor-pointer">
-                        <div class="relative">
-                            <!-- Swiper for MoU Images -->
-                            <div class="swiper mouSwiper">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <img src="{{ url_for('static', filename='images/mou1.jpeg') }}"
-                                            alt="MoU with IIT Roorkee" class="card-image">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ url_for('static', filename='images/mou2.jpeg') }}"
-                                            alt="MoU with IIT Roorkee" class="card-image">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ url_for('static', filename='images/mou3.jpeg') }}"
-                                            alt="MoU with IIT Roorkee" class="card-image">
-                                    </div>
-                                </div>
-                                <div class="swiper-pagination"></div>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title text-lg font-bold mb-2">Memorandum of Understanding (MoU) with IIT
-                                Roorkee</h3>
-                            <p class="card-description">A significant milestone was achieved as the Indian Institute of
-                                Technology (IIT) Roorkee and Haridwar University, Roorkee formalized their collaboration
-                                through
-                                the signing of a Memorandum of Understanding (MoU). This strategic partnership aims to
-                                strengthen academic cooperation, promote research and innovation, and create
-                                opportunities for
-                                knowledge exchange between the two esteemed institutions. The MoU is expected to
-                                facilitate
-                                collaborative research projects, expert lectures, skill development programs,
-                                internships, and
-                                other academic initiatives that will benefit students and faculty members alike.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="card group cursor-pointer">
-                        <div class="relative">
-                            <!-- Swiper for Nurture Farm Images -->
-                            <div class="swiper nurtureFarmSwiper">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <img src="{{ url_for('static', filename='images/nurture_foundations.jpeg') }}"
-                                            alt="Nurture Farm Placement Drive" class="card-image">
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <img src="{{ url_for('static', filename='images/mou3.jpeg') }}"
-                                            alt="Nurture Farm Placement Drive" class="card-image">
-                                    </div>
-                                </div>
-                                <div class="swiper-pagination"></div>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title text-lg font-bold mb-2">B.Sc. Agriculture Campus Placement Drive by
-                                Nurture Farm</h3>
-                            <p class="card-description">Haridwar University, Roorkee proudly hosted a Campus Placement
-                                Drive by
-                                Nurture Farm for B.Sc Agriculture Students offering students a valuable opportunity to
-                                begin
-                                their professional journey with a global organization. This achievement highlights
-                                Haridwar University's
-                                continuous
-                                commitment to enhancing employability, strengthening industry partnerships, and creating
-                                impactful career opportunities for its students. Congratulations to all the selected
-                                candidates,
-                                and best wishes for a successful future ahead!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="card group cursor-pointer">
-                        <div class="relative">
-                            <img src="{{ url_for('static', filename='images/gueston14.jpeg') }}"
-                                alt="Guest Lecture on Entrepreneurship" class="card-image">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title text-lg font-bold mb-2">Guest Lecture On Entrepreneurship</h3>
-                            <p class="card-description">Haridwar University, Roorkee is organizing a Guest Lecture on
-                                Entrepreneurship under the aegis of the MoE's Innovation Cell (Government of India) and
-                                the
-                                Institution's Innovation Council (Ministry of Education Initiative) on 14th February,
-                                2026, from
-                                10:30 AM onwards at the HU Auditorium. The session will feature two distinguished
-                                speakers:
-                                Abhay Singh, Founder - Topic: "From Student to Startup Founder – Building AgriSaarthi"
-                                and Arun
-                                Kumar Bhati, Co-Founder, AgriSaarthi - Topic: "From Industry to Innovation.</p>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
+            <!-- Navigation Buttons Inside Swiper -->
+            <div class="swiper-button-next happenings-swiper-next"></div>
+            <div class="swiper-button-prev happenings-swiper-prev"></div>
         </div>
-
+        <!-- Custom Navigation Buttons Below -->
+        <div class="flex gap-4 mt-6 justify-center sm:justify-start">
+            <button id="happenings-prev-btn" class="custom-nav-btn w-12 h-12 rounded-full border-2 border-gray-800 bg-white hover:bg-gray-800 hover:text-white flex items-center justify-center text-gray-800 transition text-xl font-bold shadow-lg">←</button>
+            <button id="happenings-next-btn" class="custom-nav-btn w-12 h-12 rounded-full border-2 border-gray-800 bg-white hover:bg-gray-800 hover:text-white flex items-center justify-center text-gray-800 transition text-xl font-bold shadow-lg">→</button>
+        </div>
+        {% else %}
+        <div class="text-center py-12">
+            <p class="text-gray-500 text-lg">No happenings available at the moment. Check back soon!</p>
+        </div>
+        {% endif %}
     </div>
 </section>
 
 <!-- Upcoming Events Section -->
 <section class="section-padding" style="background: #000000;">
     <div class="max-w-7xl mx-auto">
-        <h2 class="text-4xl md:text-6xl font-black mb-12 text-white">UPCOMING EVENTS</h2>
-        <div class="grid md:grid-cols-4 gap-6 mb-8">
-            <div class="group cursor-pointer">
-                <div class="relative overflow-hidden rounded-2xl">
-                    <img src="{{ url_for('static', filename='images/canvacomp.jpeg') }}" alt="Canvas Competition"
-                        class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
-                    <div class="absolute top-4 right-4 bg-cyan-400 text-black px-4 py-2 rounded-full font-black">
-                        <div class="text-2xl leading-none">14</div>
-                        <div class="text-xs">FEB</div>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-8 md:mb-12 text-white">UPCOMING EVENTS</h2>
+        {% if events %}
+            <div class="swiper eventsSwiper mb-8">
+                <div class="swiper-wrapper">
+                    {% for event in events %}
+                    <div class="swiper-slide">
+                        <div class="group cursor-pointer">
+                            <div class="relative overflow-hidden rounded-xl md:rounded-2xl">
+                                <img src="{{ url_for('static', filename=event.image_path) }}" alt="{{ event.title }}"
+                                    class="w-full h-48 sm:h-56 md:h-64 object-cover object-top group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute top-3 sm:top-4 right-3 sm:right-4 bg-cyan-400 text-black px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-black">
+                                    <div class="text-xl sm:text-2xl leading-none">{{ event.event_date.strftime('%d') }}</div>
+                                    <div class="text-xs">{{ event.event_date.strftime('%b').upper() }}</div>
+                                </div>
+                            </div>
+                            <div class="mt-3 sm:mt-4">
+                                <h3 class="text-white font-bold text-base sm:text-lg md:text-xl mb-2">{{ event.title }}</h3>
+                                <p class="text-gray-400 text-xs sm:text-sm">{{ event.description[:150] }}{% if event.description|length > 150 %}...{% endif %}</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="mt-4">
-                    <h3 class="text-white font-bold text-xl mb-2">Canvas Competition</h3>
-                    <p class="text-gray-400 text-sm">Unleash your creativity in this exciting canvas art competition. Showcase your artistic talent and win amazing prizes...</p>
+                    {% endfor %}
                 </div>
             </div>
-            <div class="group cursor-pointer">
-                <div class="relative overflow-hidden rounded-2xl">
-                    <img src="{{ url_for('static', filename='images/djnight.jpeg') }}" alt="DJ Night"
-                        class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
-                    <div class="absolute top-4 right-4 bg-cyan-400 text-black px-4 py-2 rounded-full font-black">
-                        <div class="text-2xl leading-none">15</div>
-                        <div class="text-xs">FEB</div>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <h3 class="text-white font-bold text-xl mb-2">DJ Night</h3>
-                    <p class="text-gray-400 text-sm">Dance the night away with electrifying music and performances by top DJs. An unforgettable evening of entertainment...</p>
-                </div>
+            <div class="flex gap-2 mt-6">
+                <button class="events-swiper-prev w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-white flex items-center justify-center text-white hover:bg-white hover:text-black transition text-lg sm:text-xl">←</button>
+                <button class="events-swiper-next w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-white flex items-center justify-center text-white hover:bg-white hover:text-black transition text-lg sm:text-xl">→</button>
             </div>
-            <div class="group cursor-pointer">
-                <div class="relative overflow-hidden rounded-2xl">
-                    <img src="{{ url_for('static', filename='images/photographycomp.jpeg') }}" alt="Photography Competition"
-                        class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
-                    <div class="absolute top-4 right-4 bg-cyan-400 text-black px-4 py-2 rounded-full font-black">
-                        <div class="text-2xl leading-none">14</div>
-                        <div class="text-xs">FEB</div>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <h3 class="text-white font-bold text-xl mb-2">Photography Competition</h3>
-                    <p class="text-gray-400 text-sm">Capture the essence of moments. Participate in our photography competition and exhibit your best work...</p>
-                </div>
+        {% else %}
+            <div class="text-center py-12">
+                <p class="text-gray-400 text-lg">No upcoming events at the moment. Check back soon!</p>
             </div>
-            <div class="group cursor-pointer">
-                <div class="relative overflow-hidden rounded-2xl">
-                    <img src="{{ url_for('static', filename='images/rampwalk.jpeg') }}" alt="Ramp Walk"
-                        class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
-                    <div class="absolute top-4 right-4 bg-cyan-400 text-black px-4 py-2 rounded-full font-black">
-                        <div class="text-2xl leading-none">15</div>
-                        <div class="text-xs">FEB</div>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <h3 class="text-white font-bold text-xl mb-2">Ramp Walk</h3>
-                    <p class="text-gray-400 text-sm">Showcase fashion and style on the ramp. A glamorous event featuring the latest trends and talented models...</p>
-                </div>
-            </div>
-        </div>
-        <div class="flex gap-2">
-            <button
-                class="w-12 h-12 rounded-full border-2 border-white flex items-center justify-center text-white hover:bg-white hover:text-black transition">←</button>
-            <button
-                class="w-12 h-12 rounded-full border-2 border-white flex items-center justify-center text-white hover:bg-white hover:text-black transition">→</button>
-        </div>
+        {% endif %}
     </div>
 </section>
 
 <script>
-    // Initialize Swiper for Placement Drive Images
-    const placementSwiper = new Swiper('.placementSwiper', {
-        slidesPerView: 1,
-        spaceBetween: 0,
-        loop: true,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        effect: 'fade',
-        fadeEffect: {
-            crossFade: true
-        },
-    });
-
-    // Initialize Swiper for MoU Images
-    const mouSwiper = new Swiper('.mouSwiper', {
-        slidesPerView: 1,
-        spaceBetween: 0,
-        loop: true,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        effect: 'fade',
-        fadeEffect: {
-            crossFade: true
-        },
-    });
-
-    // Initialize Swiper for Nurture Farm Images
-    const nurtureFarmSwiper = new Swiper('.nurtureFarmSwiper', {
-        slidesPerView: 1,
-        spaceBetween: 0,
-        loop: true,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        effect: 'fade',
-        fadeEffect: {
-            crossFade: true
-        },
-    });
-
-    // Initialize Swiper for Happenings Cards (Main Carousel)
-    const happeningsSwiper = new Swiper('.happeningsSwiper', {
-        slidesPerView: 1,
-        spaceBetween: 24,
-        loop: true,
-        autoplay: {
-            delay: 4000,
-            disableOnInteraction: false,
-        },
-        breakpoints: {
-            640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-            },
-            1024: {
-                slidesPerView: 3,
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Swiper for Happenings Cards (Main Carousel)
+        if (document.querySelector('.happeningsSwiper')) {
+            const happeningsSwiper = new Swiper('.happeningsSwiper', {
+                slidesPerView: 1,
                 spaceBetween: 24,
-            },
-        },
+                loop: true,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                navigation: {
+                    nextEl: '.happeningsSwiper .swiper-button-next',
+                    prevEl: '.happeningsSwiper .swiper-button-prev',
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 24,
+                    },
+                },
+            });
+
+            // Connect custom navigation buttons
+            const prevBtn = document.getElementById('happenings-prev-btn');
+            const nextBtn = document.getElementById('happenings-next-btn');
+            
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function() {
+                    happeningsSwiper.slidePrev();
+                });
+            }
+            
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    happeningsSwiper.slideNext();
+                });
+            }
+        }
+
+        // Initialize Swiper for Upcoming Events
+        if (document.querySelector('.eventsSwiper')) {
+            const eventsSwiper = new Swiper('.eventsSwiper', {
+                slidesPerView: 1,
+                spaceBetween: 24,
+                loop: true,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                navigation: {
+                    nextEl: '.events-swiper-next',
+                    prevEl: '.events-swiper-prev',
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    1024: {
+                        slidesPerView: 4,
+                        spaceBetween: 24,
+                    },
+                },
+            });
+        }
     });
 
     // Smooth scroll for anchor links
