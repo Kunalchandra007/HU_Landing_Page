@@ -5,15 +5,7 @@ load_dotenv()
 
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'dev-key-change-in-production')
-    
-    # Use /tmp for Vercel serverless, local path for development
-    if os.getenv('VERCEL'):
-        # Vercel environment - use /tmp directory
-        SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:////tmp/university.db')
-    else:
-        # Local development
-        SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///university.db')
-    
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///university.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     # Email configuration
