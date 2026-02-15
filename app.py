@@ -7,29 +7,44 @@ from datetime import datetime
 from config import Config
 from models import db, Admin, Event, Happening
 
+# Initialize Flask application
 app = Flask(__name__)
+# Load configuration from Config class (includes database settings)
 app.config.from_object(Config)
 
-# Initialize extensions
+# Initialize Flask extensions
+# Database: Initialize SQLAlchemy with app context
 db.init_app(app)
+# Email: Initialize Flask-Mail for contact form
 mail = Mail(app)
+# Authentication: Initialize Flask-Login for admin authentication
 login_manager = LoginManager(app)
-login_manager.login_view = 'admin_login'
+login_manager.login_view = 'admin_login'  # Redirect to login page if not authenticated
 
 @login_manager.user_loader
 def load_user(user_id):
+    """Load user from database for Flask-Login session management"""
     return Admin.query.get(int(user_id))
 
 # Create upload folder if it doesn't exist
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 def allowed_file(filename):
+    """Check if uploaded file has an allowed extension"""
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 # Public Routes
 @app.route('/')
 def home():
+    """
+    Homepage route - displays events and happenings
+    Database queries:
+    - Fetches all active events ordered by event date
+    - Fetches all active happenings ordered by creation date (newest first)
+    """
+    # Query database for active events, ordered by event date
     events = Event.query.filter_by(is_active=True).order_by(Event.event_date).all()
+    # Query database for active happenings, ordered by newest first
     happenings = Happening.query.filter_by(is_active=True).order_by(Happening.created_at.desc()).all()
     return render_template('index.html', events=events, happenings=happenings)
 
@@ -297,7 +312,11 @@ def admin_toggle_happening(happening_id):
 # Initialize database and create admin user
 @app.cli.command()
 def init_db():
-    """Initialize the database and create admin user."""
+    """
+    Flask CLI command to initialize the database
+    Usage: flask init-db
+    Creates all database tables and default admin user
+    """
     db.create_all()
     
     # Check if admin exists
@@ -311,10 +330,15 @@ def init_db():
     else:
         print('Database already initialized!')
 
-# Initialize database tables
+# Database Initialization on Startup
+# This runs when the app starts (important for Vercel serverless)
 with app.app_context():
+    # Create all database tables if they don't exist
+    # Works with both SQLite (local) and PostgreSQL (production)
     db.create_all()
+    
     # Create default admin user if it doesn't exist
+    # This ensures there's always an admin account to access the dashboard
     admin = Admin.query.filter_by(username='admin').first()
     if not admin:
         admin = Admin(username='admin')
