@@ -314,6 +314,14 @@ def init_db():
 # Initialize database tables
 with app.app_context():
     db.create_all()
+    # Create default admin user if it doesn't exist
+    admin = Admin.query.filter_by(username='admin').first()
+    if not admin:
+        admin = Admin(username='admin')
+        admin.set_password('admin123')
+        db.session.add(admin)
+        db.session.commit()
+        print('Admin user created (username: admin, password: admin123)')
 
 if __name__ == '__main__':
     app.run(debug=True)
