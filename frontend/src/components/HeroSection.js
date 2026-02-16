@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import SplitText from './SplitText';
 import './HeroSection.css';
 
 function HeroSection() {

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentAdmin, adminLogout, getEvents, getHappenings } from '../services/api';
+import { adminLogout, getEvents, getHappenings } from '../services/api';
 import './AdminDashboard.css';
 
 function AdminDashboard() {
@@ -10,12 +10,7 @@ function AdminDashboard() {
   const [happenings, setHappenings] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    checkAuth();
-    fetchData();
-  }, []);
-
-  const checkAuth = async () => {
+  const checkAuth = useCallback(() => {
     try {
       // Check localStorage for login state
       const isLoggedIn = localStorage.getItem('adminLoggedIn');
@@ -32,9 +27,9 @@ function AdminDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [navigate]);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const [eventsData, happeningsData] = await Promise.all([
         getEvents(),
@@ -45,7 +40,12 @@ function AdminDashboard() {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    checkAuth();
+    fetchData();
+  }, [checkAuth, fetchData]);
 
   const handleLogout = async () => {
     try {
