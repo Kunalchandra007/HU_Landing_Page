@@ -1,0 +1,17 @@
+{
+  "name": "haridwar-university-website",
+  "version": "1.0.0",
+  "description": "Haridwar University Official Website - Built with Flask, Tailwind CSS, and Swiper.js",
+  "scripts": {
+    "dev": "python app.py"
+  },
+  "keywords": [
+    "university",
+    "education",
+    "flask",
+    "tailwind",
+    "website"
+  ],
+  "author": "Haridwar University",
+  "license": "MIT"
+}

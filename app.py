@@ -332,17 +332,24 @@ def init_db():
 
 # Database Initialization on Startup
 # This runs when the app starts (important for Vercel serverless)
-with app.app_context():
-    # Create all database tables if they don't exist
-    # Works with both SQLite (local) and PostgreSQL (production)
-    db.create_all()
-    
-    # Create default admin user if it doesn't exist
-    # This ensures there's always an admin account to access the dashboard
-    admin = Admin.query.filter_by(username='admin').first()
-    if not admin:
-        admin = Admin(username='admin')
-        admin.set_password('admin123')
+try:
+    with app.app_context():
+        # Create all database tables if they don't exist
+        # Works with both SQLite (local) and PostgreSQL (production)
+        db.create_all()
+        
+        # Create default admin user if it doesn't exist
+        # This ensures there's always an admin account to access the dashboard
+        admin = Admin.query.filter_by(username='admin').first()
+        if not admin:
+            admin = Admin(username='admin')
+            admin.set_password('admin123')
+            db.session.add(admin)
+            db.session.commit()
+            print('Admin user created successfully')
+except Exception as e:
+    print(f'Database initialization warning: {e}')
+    # Continue anyway - database might initialize on first request
         db.session.add(admin)
         db.session.commit()
         print('Admin user created (username: admin, password: admin123)')
