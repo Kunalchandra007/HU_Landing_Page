@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { addEvent } from '../services/api';
 import './AddContent.css';
 
 function AddEvent() {
@@ -53,16 +54,13 @@ function AddEvent() {
         formDataToSend.append('image', formData.image);
       }
 
-      // TODO: Add API call to submit event
-      console.log('Event data:', formData);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await addEvent(formDataToSend);
+      console.log('Event added:', response);
       
       alert('Event added successfully!');
       navigate('/admin/dashboard');
     } catch (err) {
-      setError('Failed to add event. Please try again.');
+      setError(err.response?.data?.error || 'Failed to add event. Please try again.');
       console.error('Error:', err);
     } finally {
       setLoading(false);

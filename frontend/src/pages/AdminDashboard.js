@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { adminLogout, getEvents, getHappenings } from '../services/api';
+import { adminLogout, getEvents, getHappenings, deleteEvent, deleteHappening } from '../services/api';
 import './AdminDashboard.css';
 
 function AdminDashboard() {
@@ -71,6 +71,34 @@ function AdminDashboard() {
     window.location.href = '/';
   };
 
+  const handleDeleteEvent = async (eventId) => {
+    if (window.confirm('Are you sure you want to delete this event?')) {
+      try {
+        await deleteEvent(eventId);
+        // Refresh events list
+        fetchData();
+        alert('Event deleted successfully!');
+      } catch (error) {
+        console.error('Error deleting event:', error);
+        alert('Failed to delete event. Please try again.');
+      }
+    }
+  };
+
+  const handleDeleteHappening = async (happeningId) => {
+    if (window.confirm('Are you sure you want to delete this happening?')) {
+      try {
+        await deleteHappening(happeningId);
+        // Refresh happenings list
+        fetchData();
+        alert('Happening deleted successfully!');
+      } catch (error) {
+        console.error('Error deleting happening:', error);
+        alert('Failed to delete happening. Please try again.');
+      }
+    }
+  };
+
   if (loading) {
     return <div className="admin-dashboard"><p>Loading...</p></div>;
   }
@@ -109,8 +137,8 @@ function AdminDashboard() {
                     <span className="item-date">{event.event_date}</span>
                   </div>
                   <div className="item-actions">
-                    <button className="edit-btn">Edit</button>
-                    <button className="delete-btn">Delete</button>
+                    <button className="edit-btn" onClick={() => navigate(`/admin/events/edit/${event.id}`)}>Edit</button>
+                    <button className="delete-btn" onClick={() => handleDeleteEvent(event.id)}>Delete</button>
                   </div>
                 </div>
               ))
@@ -139,8 +167,8 @@ function AdminDashboard() {
                     <p>{happening.description.substring(0, 100)}...</p>
                   </div>
                   <div className="item-actions">
-                    <button className="edit-btn">Edit</button>
-                    <button className="delete-btn">Delete</button>
+                    <button className="edit-btn" onClick={() => navigate(`/admin/happenings/edit/${happening.id}`)}>Edit</button>
+                    <button className="delete-btn" onClick={() => handleDeleteHappening(happening.id)}>Delete</button>
                   </div>
                 </div>
               ))

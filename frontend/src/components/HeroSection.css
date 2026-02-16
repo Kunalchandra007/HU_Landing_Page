@@ -407,7 +407,7 @@
   top: 1.5rem;
   right: 1.5rem;
   z-index: 1001;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
   border: none;
   border-radius: 12px;
   width: 50px;
@@ -418,12 +418,12 @@
   gap: 5px;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
 }
 
 .mobile-menu-toggle:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
 }
 
 .mobile-menu-toggle span {

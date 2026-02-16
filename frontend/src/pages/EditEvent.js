@@ -1,18 +1,44 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { addHappening } from '../services/api';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getEvent, updateEvent } from '../services/api';
 import './AddContent.css';
 
-function AddHappening() {
+function EditEvent() {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [formData, setFormData] = useState({
     title: '',
     description: '',
+    event_date: '',
     image: null
   });
   const [loading, setLoading] = useState(false);
+  const [fetchLoading, setFetchLoading] = useState(true);
   const [error, setError] = useState('');
   const [preview, setPreview] = useState(null);
+  const [currentImage, setCurrentImage] = useState(null);
+
+  useEffect(() => {
+    const fetchEvent = async () => {
+      try {
+        const event = await getEvent(id);
+        setFormData({
+          title: event.title,
+          description: event.description,
+          event_date: event.event_date,
+          image: null
+        });
+        setCurrentImage(event.image_path);
+      } catch (err) {
+        console.error('Error fetching event:', err);
+        setError('Failed to load event data');
+      } finally {
+        setFetchLoading(false);
+      }
+    };
+
+    fetchEvent();
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,22 +74,33 @@ function AddHappening() {
       const formDataToSend = new FormData();
       formDataToSend.append('title', formData.title);
       formDataToSend.append('description', formData.description);
+      formDataToSend.append('event_date', formData.event_date);
       if (formData.image) {
         formDataToSend.append('image', formData.image);
       }
 
-      const response = await addHappening(formDataToSend);
-      console.log('Happening added:', response);
+      const response = await updateEvent(id, formDataToSend);
+      console.log('Event updated:', response);
       
-      alert('Happening added successfully!');
+      alert('Event updated successfully!');
       navigate('/admin/dashboard');
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to add happening. Please try again.');
+      setError(err.response?.data?.error || 'Failed to update event. Please try again.');
       console.error('Error:', err);
     } finally {
       setLoading(false);
     }
   };
+
+  if (fetchLoading) {
+    return (
+      <div className="add-content-page">
+        <div className="add-content-container">
+          <p>Loading event data...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="add-content-page">
@@ -72,51 +109,68 @@ function AddHappening() {
           <button onClick={() => navigate('/admin/dashboard')} className="back-btn">
             ← Back to Dashboard
           </button>
-          <h1>📰 Add New Happening</h1>
+          <h1>✏️ Edit Event</h1>
         </div>
 
         <form onSubmit={handleSubmit} className="content-form">
           <div className="form-group">
-            <label htmlFor="title">Happening Title *</label>
+            <label htmlFor="title">Event Title *</label>
             <input
               type="text"
               id="title"
               name="title"
               value={formData.title}
               onChange={handleChange}
-              placeholder="Enter happening title"
+              placeholder="Enter event title"
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="description">Happening Description *</label>
+            <label htmlFor="description">Event Description *</label>
             <textarea
               id="description"
               name="description"
               value={formData.description}
               onChange={handleChange}
-              placeholder="Enter happening description"
-              rows="6"
+              placeholder="Enter event description"
+              rows="5"
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="image">Happening Image *</label>
+            <label htmlFor="event_date">Event Date *</label>
+            <input
+              type="date"
+              id="event_date"
+              name="event_date"
+              value={formData.event_date}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="image">Event Image (leave empty to keep current)</label>
             <input
               type="file"
               id="image"
               name="image"
               onChange={handleImageChange}
               accept="image/*"
-              required
             />
-            {preview && (
+            {preview ? (
               <div className="image-preview">
+                <p>New Image:</p>
                 <img src={preview} alt="Preview" />
               </div>
-            )}
+            ) : currentImage ? (
+              <div className="image-preview">
+                <p>Current Image:</p>
+                <img src={`/${currentImage}`} alt="Current" />
+              </div>
+            ) : null}
           </div>
 
           {error && <div className="error-message">{error}</div>}
@@ -126,7 +180,7 @@ function AddHappening() {
               Cancel
             </button>
             <button type="submit" disabled={loading} className="submit-btn">
-              {loading ? 'Adding...' : 'Add Happening'}
+              {loading ? 'Updating...' : 'Update Event'}
             </button>
           </div>
         </form>
@@ -135,4 +189,4 @@ function AddHappening() {
   );
 }
 
-export default AddHappening;
+export default EditEvent;

@@ -44,4 +44,86 @@ export const getCurrentAdmin = async () => {
   return response.data;
 };
 
+// Add Event
+export const addEvent = async (formData) => {
+  const response = await api.post('/admin/events', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
+};
+
+// Add Happening
+export const addHappening = async (formData) => {
+  const response = await api.post('/admin/happenings', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
+};
+
+// Delete Event
+export const deleteEvent = async (eventId) => {
+  const response = await api.delete(`/admin/events/${eventId}`);
+  return response.data;
+};
+
+// Delete Happening
+export const deleteHappening = async (happeningId) => {
+  const response = await api.delete(`/admin/happenings/${happeningId}`);
+  return response.data;
+};
+
+// Get single event
+export const getEvent = async (eventId) => {
+  const response = await api.get(`/admin/events/${eventId}`);
+  return response.data;
+};
+
+// Update event
+export const updateEvent = async (eventId, formData) => {
+  const response = await api.put(`/admin/events/${eventId}`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
+};
+
+// Get single happening
+export const getHappening = async (happeningId) => {
+  const response = await api.get(`/admin/happenings/${happeningId}`);
+  return response.data;
+};
+
+// Update happening
+export const updateHappening = async (happeningId, formData) => {
+  const response = await api.put(`/admin/happenings/${happeningId}`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
+};
+
+// Mark event as completed
+export const markEventCompleted = async (eventId, videoUrl) => {
+  const response = await api.put(`/admin/events/${eventId}/complete`, { video_url: videoUrl });
+  return response.data;
+};
+
+// Mark happening as completed
+export const markHappeningCompleted = async (happeningId) => {
+  const response = await api.put(`/admin/happenings/${happeningId}/complete`);
+  return response.data;
+};
+
+// Get completed events
+export const getCompletedEvents = async () => {
+  const response = await api.get('/events/completed');
+  return response.data;
+};
+
 export default api;

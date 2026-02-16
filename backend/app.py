@@ -122,6 +122,313 @@ def admin_logout():
 def get_current_admin():
     return jsonify({'username': current_user.username}), 200
 
+# Add new event
+@app.route('/api/admin/events', methods=['POST'])
+def add_event():
+    try:
+        # Get form data
+        title = request.form.get('title')
+        description = request.form.get('description')
+        event_date = request.form.get('event_date')
+        
+        # Validate required fields
+        if not all([title, description, event_date]):
+            return jsonify({'error': 'All fields are required'}), 400
+        
+        # Handle file upload
+        if 'image' not in request.files:
+            return jsonify({'error': 'Image is required'}), 400
+        
+        file = request.files['image']
+        if file.filename == '':
+            return jsonify({'error': 'No file selected'}), 400
+        
+        if file and allowed_file(file.filename):
+            # Create unique filename
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            filename = secure_filename(file.filename)
+            unique_filename = f"{timestamp}_{filename}"
+            
+            # Save to static/images folder
+            static_images_path = os.path.join('static', 'images', unique_filename)
+            os.makedirs(os.path.dirname(static_images_path), exist_ok=True)
+            file.save(static_images_path)
+            
+            # Also save to frontend/public/images for development
+            frontend_images_path = os.path.join('frontend', 'public', 'images', unique_filename)
+            os.makedirs(os.path.dirname(frontend_images_path), exist_ok=True)
+            file.seek(0)  # Reset file pointer
+            file.save(frontend_images_path)
+            
+            # Create event in database
+            event = Event(
+                title=title,
+                description=description,
+                event_date=datetime.strptime(event_date, '%Y-%m-%d').date(),
+                image_path=f"images/{unique_filename}"
+            )
+            db.session.add(event)
+            db.session.commit()
+            
+            return jsonify({'message': 'Event added successfully', 'event': event.to_dict()}), 201
+        else:
+            return jsonify({'error': 'Invalid file type'}), 400
+            
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+# Add new happening
+@app.route('/api/admin/happenings', methods=['POST'])
+def add_happening():
+    try:
+        # Get form data
+        title = request.form.get('title')
+        description = request.form.get('description')
+        
+        # Validate required fields
+        if not all([title, description]):
+            return jsonify({'error': 'All fields are required'}), 400
+        
+        # Handle file upload
+        if 'image' not in request.files:
+            return jsonify({'error': 'Image is required'}), 400
+        
+        file = request.files['image']
+        if file.filename == '':
+            return jsonify({'error': 'No file selected'}), 400
+        
+        if file and allowed_file(file.filename):
+            # Create unique filename
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            filename = secure_filename(file.filename)
+            unique_filename = f"{timestamp}_{filename}"
+            
+            # Save to static/images folder
+            static_images_path = os.path.join('static', 'images', unique_filename)
+            os.makedirs(os.path.dirname(static_images_path), exist_ok=True)
+            file.save(static_images_path)
+            
+            # Also save to frontend/public/images for development
+            frontend_images_path = os.path.join('frontend', 'public', 'images', unique_filename)
+            os.makedirs(os.path.dirname(frontend_images_path), exist_ok=True)
+            file.seek(0)  # Reset file pointer
+            file.save(frontend_images_path)
+            
+            # Create happening in database
+            happening = Happening(
+                title=title,
+                description=description,
+                image_path=f"images/{unique_filename}"
+            )
+            db.session.add(happening)
+            db.session.commit()
+            
+            return jsonify({'message': 'Happening added successfully', 'happening': happening.to_dict()}), 201
+        else:
+            return jsonify({'error': 'Invalid file type'}), 400
+            
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+# Delete event
+@app.route('/api/admin/events/<int:event_id>', methods=['DELETE'])
+def delete_event(event_id):
+    try:
+        event = Event.query.get(event_id)
+        if not event:
+            return jsonify({'error': 'Event not found'}), 404
+        
+        # Delete image file if it exists
+        if event.image_path:
+            # Delete from static/images
+            static_file_path = os.path.join('static', event.image_path)
+            if os.path.exists(static_file_path):
+                os.remove(static_file_path)
+            
+            # Delete from frontend/public/images
+            frontend_file_path = os.path.join('frontend', 'public', event.image_path)
+            if os.path.exists(frontend_file_path):
+                os.remove(frontend_file_path)
+        
+        db.session.delete(event)
+        db.session.commit()
+        
+        return jsonify({'message': 'Event deleted successfully'}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+# Delete happening
+@app.route('/api/admin/happenings/<int:happening_id>', methods=['DELETE'])
+def delete_happening(happening_id):
+    try:
+        happening = Happening.query.get(happening_id)
+        if not happening:
+            return jsonify({'error': 'Happening not found'}), 404
+        
+        # Delete image file if it exists
+        if happening.image_path:
+            # Delete from static/images
+            static_file_path = os.path.join('static', happening.image_path)
+            if os.path.exists(static_file_path):
+                os.remove(static_file_path)
+            
+            # Delete from frontend/public/images
+            frontend_file_path = os.path.join('frontend', 'public', happening.image_path)
+            if os.path.exists(frontend_file_path):
+                os.remove(frontend_file_path)
+        
+        db.session.delete(happening)
+        db.session.commit()
+        
+        return jsonify({'message': 'Happening deleted successfully'}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+# Get single event by ID
+@app.route('/api/admin/events/<int:event_id>', methods=['GET'])
+def get_event(event_id):
+    try:
+        event = Event.query.get(event_id)
+        if not event:
+            return jsonify({'error': 'Event not found'}), 404
+        return jsonify(event.to_dict()), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# Update event
+@app.route('/api/admin/events/<int:event_id>', methods=['PUT'])
+def update_event(event_id):
+    try:
+        event = Event.query.get(event_id)
+        if not event:
+            return jsonify({'error': 'Event not found'}), 404
+        
+        # Get form data
+        title = request.form.get('title')
+        description = request.form.get('description')
+        event_date = request.form.get('event_date')
+        
+        # Update fields
+        if title:
+            event.title = title
+        if description:
+            event.description = description
+        if event_date:
+            event.event_date = datetime.strptime(event_date, '%Y-%m-%d').date()
+        
+        # Handle image upload if new image provided
+        if 'image' in request.files:
+            file = request.files['image']
+            if file and file.filename != '' and allowed_file(file.filename):
+                # Delete old image
+                if event.image_path:
+                    # Delete from static/images
+                    old_static_path = os.path.join('static', event.image_path)
+                    if os.path.exists(old_static_path):
+                        os.remove(old_static_path)
+                    
+                    # Delete from frontend/public/images
+                    old_frontend_path = os.path.join('frontend', 'public', event.image_path)
+                    if os.path.exists(old_frontend_path):
+                        os.remove(old_frontend_path)
+                
+                # Save new image
+                timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+                filename = secure_filename(file.filename)
+                unique_filename = f"{timestamp}_{filename}"
+                
+                # Save to static/images
+                static_images_path = os.path.join('static', 'images', unique_filename)
+                os.makedirs(os.path.dirname(static_images_path), exist_ok=True)
+                file.save(static_images_path)
+                
+                # Save to frontend/public/images
+                frontend_images_path = os.path.join('frontend', 'public', 'images', unique_filename)
+                os.makedirs(os.path.dirname(frontend_images_path), exist_ok=True)
+                file.seek(0)
+                file.save(frontend_images_path)
+                
+                event.image_path = f"images/{unique_filename}"
+        
+        db.session.commit()
+        return jsonify({'message': 'Event updated successfully', 'event': event.to_dict()}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+# Get single happening by ID
+@app.route('/api/admin/happenings/<int:happening_id>', methods=['GET'])
+def get_happening(happening_id):
+    try:
+        happening = Happening.query.get(happening_id)
+        if not happening:
+            return jsonify({'error': 'Happening not found'}), 404
+        return jsonify(happening.to_dict()), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# Update happening
+@app.route('/api/admin/happenings/<int:happening_id>', methods=['PUT'])
+def update_happening(happening_id):
+    try:
+        happening = Happening.query.get(happening_id)
+        if not happening:
+            return jsonify({'error': 'Happening not found'}), 404
+        
+        # Get form data
+        title = request.form.get('title')
+        description = request.form.get('description')
+        
+        # Update fields
+        if title:
+            happening.title = title
+        if description:
+            happening.description = description
+        
+        # Handle image upload if new image provided
+        if 'image' in request.files:
+            file = request.files['image']
+            if file and file.filename != '' and allowed_file(file.filename):
+                # Delete old image
+                if happening.image_path:
+                    # Delete from static/images
+                    old_static_path = os.path.join('static', happening.image_path)
+                    if os.path.exists(old_static_path):
+                        os.remove(old_static_path)
+                    
+                    # Delete from frontend/public/images
+                    old_frontend_path = os.path.join('frontend', 'public', happening.image_path)
+                    if os.path.exists(old_frontend_path):
+                        os.remove(old_frontend_path)
+                
+                # Save new image
+                timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+                filename = secure_filename(file.filename)
+                unique_filename = f"{timestamp}_{filename}"
+                
+                # Save to static/images
+                static_images_path = os.path.join('static', 'images', unique_filename)
+                os.makedirs(os.path.dirname(static_images_path), exist_ok=True)
+                file.save(static_images_path)
+                
+                # Save to frontend/public/images
+                frontend_images_path = os.path.join('frontend', 'public', 'images', unique_filename)
+                os.makedirs(os.path.dirname(frontend_images_path), exist_ok=True)
+                file.seek(0)
+                file.save(frontend_images_path)
+                
+                happening.image_path = f"images/{unique_filename}"
+        
+        db.session.commit()
+        return jsonify({'message': 'Happening updated successfully', 'happening': happening.to_dict()}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
 # Database initialization
 try:
     with app.app_context():

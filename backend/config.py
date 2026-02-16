@@ -42,6 +42,6 @@ class Config:
     MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
     
     # File upload configuration
-    UPLOAD_FOLDER = os.path.join('static', 'uploads', 'events')
+    UPLOAD_FOLDER = os.path.join('static', 'uploads')
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16MB max file size
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp', 'avif'}
