@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from flask_mail import Mail, Message
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
@@ -9,7 +9,10 @@ from config import Config
 from models import db, Admin, Event, Happening
 
 # Initialize Flask API application
-app = Flask(__name__)
+# Set static folder to serve React build
+app = Flask(__name__, 
+            static_folder='../frontend/build',
+            static_url_path='')
 app.config.from_object(Config)
 
 # Session configuration for CORS
@@ -20,7 +23,7 @@ app.config['SESSION_COOKIE_HTTPONLY'] = True
 # Enable CORS for React frontend
 CORS(app, resources={
     r"/api/*": {
-        "origins": ["http://localhost:3000", "https://*.vercel.app"],
+        "origins": ["http://localhost:3000", "https://*.vercel.app", "https://*.railway.app", "https://*.up.railway.app"],
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization"],
         "supports_credentials": True
@@ -133,5 +136,17 @@ try:
 except Exception as e:
     print(f'Database initialization: {e}')
 
+# ============= SERVE REACT APP =============
+
+# Serve React static files
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_react(path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
+
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', debug=False, port=port)
