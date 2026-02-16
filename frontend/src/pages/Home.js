@@ -8,6 +8,7 @@ import SportsGallery from '../components/SportsGallery';
 import WhySection from '../components/WhySection';
 import HappeningsSection from '../components/HappeningsSection';
 import EventsSection from '../components/EventsSection';
+import AlumniCorner from '../components/AlumniCorner';
 import Footer from '../components/Footer';
 
 function Home() {
@@ -48,6 +49,7 @@ function Home() {
       <WhySection />
       <HappeningsSection happenings={happenings} />
       <EventsSection events={events} />
+      <AlumniCorner />
       <Footer />
     </div>
   );
