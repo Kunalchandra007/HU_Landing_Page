@@ -1,0 +1,77 @@
+.programs-section {
+  padding: 4rem 2rem;
+  background: #f9fafb;
+}
+
+.programs-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.programs-container h2 {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: black;
+}
+
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.program-card {
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.program-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.program-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.program-content {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.program-content h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+.visit-btn {
+  padding: 0.75rem 1.5rem;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.visit-btn:hover {
+  background: #059669;
+}
+
+@media (max-width: 768px) {
+  .programs-container h2 {
+    font-size: 2rem;
+  }
+}

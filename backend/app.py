@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 from flask_mail import Mail, Message
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.utils import secure_filename
@@ -7,367 +8,124 @@ from datetime import datetime
 from config import Config
 from models import db, Admin, Event, Happening
 
-# Initialize Flask application
+# Initialize Flask API application
 app = Flask(__name__)
-# Load configuration from Config class (includes database settings)
 app.config.from_object(Config)
 
-# Initialize Flask extensions
-# Database: Initialize SQLAlchemy with app context
+# Enable CORS for React frontend
+CORS(app, resources={
+    r"/api/*": {
+        "origins": ["http://localhost:3000", "https://*.vercel.app"],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"]
+    }
+})
+
+# Initialize extensions
 db.init_app(app)
-# Email: Initialize Flask-Mail for contact form
 mail = Mail(app)
-# Authentication: Initialize Flask-Login for admin authentication
 login_manager = LoginManager(app)
-login_manager.login_view = 'admin_login'  # Redirect to login page if not authenticated
 
 @login_manager.user_loader
 def load_user(user_id):
-    """Load user from database for Flask-Login session management"""
     return Admin.query.get(int(user_id))
 
-# Create upload folder if it doesn't exist
+# Create upload folder
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 def allowed_file(filename):
-    """Check if uploaded file has an allowed extension"""
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
-# Public Routes
-@app.route('/')
-def home():
-    """
-    Homepage route - displays events and happenings
-    Database queries:
-    - Fetches all active events ordered by event date
-    - Fetches all active happenings ordered by creation date (newest first)
-    """
-    try:
-        # Query database for active events, ordered by event date
-        events = Event.query.filter_by(is_active=True).order_by(Event.event_date).all()
-        # Query database for active happenings, ordered by newest first
-        happenings = Happening.query.filter_by(is_active=True).order_by(Happening.created_at.desc()).all()
-    except Exception as e:
-        print(f'Database query error: {e}')
-        # Return empty lists if database is not available
-        events = []
-        happenings = []
-    return render_template('index.html', events=events, happenings=happenings)
+# ============= API ROUTES =============
 
-@app.route('/health')
+# Health check
+@app.route('/api/health', methods=['GET'])
 def health():
-    """Health check endpoint for Vercel"""
-    return {'status': 'ok', 'message': 'Flask app is running'}, 200
+    return jsonify({'status': 'ok', 'message': 'API is running'}), 200
 
-@app.route('/contact', methods=['GET', 'POST'])
+# Get all events
+@app.route('/api/events', methods=['GET'])
+def get_events():
+    try:
+        events = Event.query.filter_by(is_active=True).order_by(Event.event_date).all()
+        return jsonify([event.to_dict() for event in events]), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# Get all happenings
+@app.route('/api/happenings', methods=['GET'])
+def get_happenings():
+    try:
+        happenings = Happening.query.filter_by(is_active=True).order_by(Happening.created_at.desc()).all()
+        return jsonify([happening.to_dict() for happening in happenings]), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# Contact form
+@app.route('/api/contact', methods=['POST'])
 def contact():
-    if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
-        message = request.form.get('message')
+    try:
+        data = request.get_json()
+        name = data.get('name')
+        email = data.get('email')
+        message = data.get('message')
         
-        try:
-            msg = Message('Contact Form Submission',
-                          sender=app.config['MAIL_USERNAME'],
-                          recipients=[app.config['MAIL_USERNAME']])
-            msg.body = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
-            mail.send(msg)
-            flash('Message sent successfully!', 'success')
-        except Exception as e:
-            flash('Failed to send message. Please try again.', 'error')
+        if not all([name, email, message]):
+            return jsonify({'error': 'All fields are required'}), 400
         
-        return redirect(url_for('contact'))
-    
-    return render_template('contact.html')
+        msg = Message('Contact Form Submission',
+                      sender=app.config['MAIL_USERNAME'],
+                      recipients=[app.config['MAIL_USERNAME']])
+        msg.body = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
+        mail.send(msg)
+        
+        return jsonify({'message': 'Message sent successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': 'Failed to send message'}), 500
 
-# Admin Authentication Routes
-@app.route('/admin/login', methods=['GET', 'POST'])
+# Admin login
+@app.route('/api/admin/login', methods=['POST'])
 def admin_login():
-    if current_user.is_authenticated:
-        return redirect(url_for('admin_dashboard'))
-    
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
+    try:
+        data = request.get_json()
+        username = data.get('username')
+        password = data.get('password')
         
         admin = Admin.query.filter_by(username=username).first()
         if admin and admin.check_password(password):
             login_user(admin)
-            flash('Login successful!', 'success')
-            return redirect(url_for('admin_dashboard'))
+            return jsonify({'message': 'Login successful', 'user': {'username': admin.username}}), 200
         else:
-            flash('Invalid username or password', 'error')
-    
-    return render_template('admin/login.html')
+            return jsonify({'error': 'Invalid credentials'}), 401
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-@app.route('/admin/logout')
+# Admin logout
+@app.route('/api/admin/logout', methods=['POST'])
 @login_required
 def admin_logout():
     logout_user()
-    flash('Logged out successfully', 'success')
-    return redirect(url_for('admin_login'))
+    return jsonify({'message': 'Logged out successfully'}), 200
 
-# Admin Dashboard Routes
-@app.route('/admin/dashboard')
+# Get current admin user
+@app.route('/api/admin/me', methods=['GET'])
 @login_required
-def admin_dashboard():
-    events = Event.query.order_by(Event.event_date.desc()).all()
-    return render_template('admin/dashboard.html', events=events)
+def get_current_admin():
+    return jsonify({'username': current_user.username}), 200
 
-@app.route('/admin/events/add', methods=['GET', 'POST'])
-@login_required
-def admin_add_event():
-    if request.method == 'POST':
-        title = request.form.get('title')
-        description = request.form.get('description')
-        event_date = datetime.strptime(request.form.get('event_date'), '%Y-%m-%d').date()
-        
-        # Handle file upload
-        if 'image' not in request.files:
-            flash('No image file provided', 'error')
-            return redirect(request.url)
-        
-        file = request.files['image']
-        if file.filename == '':
-            flash('No image selected', 'error')
-            return redirect(request.url)
-        
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            # Add timestamp to filename to avoid conflicts
-            filename = f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{filename}"
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(filepath)
-            
-            # Store relative path for database
-            image_path = f"uploads/events/{filename}"
-            
-            event = Event(
-                title=title,
-                description=description,
-                event_date=event_date,
-                image_path=image_path
-            )
-            db.session.add(event)
-            db.session.commit()
-            
-            flash('Event added successfully!', 'success')
-            return redirect(url_for('admin_dashboard'))
-        else:
-            flash('Invalid file type. Allowed types: png, jpg, jpeg, gif, webp, avif', 'error')
-    
-    return render_template('admin/add_event.html')
-
-@app.route('/admin/events/edit/<int:event_id>', methods=['GET', 'POST'])
-@login_required
-def admin_edit_event(event_id):
-    event = Event.query.get_or_404(event_id)
-    
-    if request.method == 'POST':
-        event.title = request.form.get('title')
-        event.description = request.form.get('description')
-        event.event_date = datetime.strptime(request.form.get('event_date'), '%Y-%m-%d').date()
-        
-        # Handle file upload if new image provided
-        if 'image' in request.files:
-            file = request.files['image']
-            if file.filename != '' and file and allowed_file(file.filename):
-                # Delete old image
-                old_image_path = os.path.join('static', event.image_path)
-                if os.path.exists(old_image_path):
-                    os.remove(old_image_path)
-                
-                filename = secure_filename(file.filename)
-                filename = f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{filename}"
-                filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                file.save(filepath)
-                event.image_path = f"uploads/events/{filename}"
-        
-        db.session.commit()
-        flash('Event updated successfully!', 'success')
-        return redirect(url_for('admin_dashboard'))
-    
-    return render_template('admin/edit_event.html', event=event)
-
-@app.route('/admin/events/delete/<int:event_id>', methods=['POST'])
-@login_required
-def admin_delete_event(event_id):
-    event = Event.query.get_or_404(event_id)
-    
-    # Delete image file
-    image_path = os.path.join('static', event.image_path)
-    if os.path.exists(image_path):
-        os.remove(image_path)
-    
-    db.session.delete(event)
-    db.session.commit()
-    
-    flash('Event deleted successfully!', 'success')
-    return redirect(url_for('admin_dashboard'))
-
-@app.route('/admin/events/toggle/<int:event_id>', methods=['POST'])
-@login_required
-def admin_toggle_event(event_id):
-    event = Event.query.get_or_404(event_id)
-    event.is_active = not event.is_active
-    db.session.commit()
-    
-    status = 'activated' if event.is_active else 'deactivated'
-    return jsonify({'success': True, 'message': f'Event {status}', 'is_active': event.is_active})
-
-# Happenings Management Routes
-@app.route('/admin/happenings')
-@login_required
-def admin_happenings():
-    happenings = Happening.query.order_by(Happening.created_at.desc()).all()
-    return render_template('admin/happenings.html', happenings=happenings)
-
-@app.route('/admin/happenings/add', methods=['GET', 'POST'])
-@login_required
-def admin_add_happening():
-    if request.method == 'POST':
-        title = request.form.get('title')
-        description = request.form.get('description')
-        
-        # Handle file upload
-        if 'image' not in request.files:
-            flash('No image file provided', 'error')
-            return redirect(request.url)
-        
-        file = request.files['image']
-        if file.filename == '':
-            flash('No image selected', 'error')
-            return redirect(request.url)
-        
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            # Add timestamp to filename to avoid conflicts
-            filename = f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{filename}"
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(filepath)
-            
-            # Store relative path for database
-            image_path = f"uploads/events/{filename}"
-            
-            happening = Happening(
-                title=title,
-                description=description,
-                image_path=image_path
-            )
-            db.session.add(happening)
-            db.session.commit()
-            
-            flash('Happening added successfully!', 'success')
-            return redirect(url_for('admin_happenings'))
-        else:
-            flash('Invalid file type. Allowed types: png, jpg, jpeg, gif, webp, avif', 'error')
-    
-    return render_template('admin/add_happening.html')
-
-@app.route('/admin/happenings/edit/<int:happening_id>', methods=['GET', 'POST'])
-@login_required
-def admin_edit_happening(happening_id):
-    happening = Happening.query.get_or_404(happening_id)
-    
-    if request.method == 'POST':
-        happening.title = request.form.get('title')
-        happening.description = request.form.get('description')
-        
-        # Handle file upload if new image provided
-        if 'image' in request.files:
-            file = request.files['image']
-            if file.filename != '' and file and allowed_file(file.filename):
-                # Delete old image
-                old_image_path = os.path.join('static', happening.image_path)
-                if os.path.exists(old_image_path):
-                    os.remove(old_image_path)
-                
-                filename = secure_filename(file.filename)
-                filename = f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{filename}"
-                filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                file.save(filepath)
-                happening.image_path = f"uploads/events/{filename}"
-        
-        db.session.commit()
-        flash('Happening updated successfully!', 'success')
-        return redirect(url_for('admin_happenings'))
-    
-    return render_template('admin/edit_happening.html', happening=happening)
-
-@app.route('/admin/happenings/delete/<int:happening_id>', methods=['POST'])
-@login_required
-def admin_delete_happening(happening_id):
-    happening = Happening.query.get_or_404(happening_id)
-    
-    # Delete image file
-    image_path = os.path.join('static', happening.image_path)
-    if os.path.exists(image_path):
-        os.remove(image_path)
-    
-    db.session.delete(happening)
-    db.session.commit()
-    
-    flash('Happening deleted successfully!', 'success')
-    return redirect(url_for('admin_happenings'))
-
-@app.route('/admin/happenings/toggle/<int:happening_id>', methods=['POST'])
-@login_required
-def admin_toggle_happening(happening_id):
-    happening = Happening.query.get_or_404(happening_id)
-    happening.is_active = not happening.is_active
-    db.session.commit()
-    
-    status = 'activated' if happening.is_active else 'deactivated'
-    return jsonify({'success': True, 'message': f'Happening {status}', 'is_active': happening.is_active})
-
-# Initialize database and create admin user
-@app.cli.command()
-def init_db():
-    """
-    Flask CLI command to initialize the database
-    Usage: flask init-db
-    Creates all database tables and default admin user
-    """
-    db.create_all()
-    
-    # Check if admin exists
-    admin = Admin.query.filter_by(username='admin').first()
-    if not admin:
-        admin = Admin(username='admin')
-        admin.set_password('admin123')  # Change this password!
-        db.session.add(admin)
-        db.session.commit()
-        print('Database initialized! Admin user created (username: admin, password: admin123)')
-    else:
-        print('Database already initialized!')
-
-# Database Initialization on Startup
-# This runs when the app starts (important for Vercel serverless)
-# Wrapped in try-except to prevent crashes if database is not configured
+# Database initialization
 try:
     with app.app_context():
-        # Create all database tables if they don't exist
-        # Works with both SQLite (local) and PostgreSQL (production)
         db.create_all()
-        
-        # Create default admin user if it doesn't exist
-        # This ensures there's always an admin account to access the dashboard
-        try:
-            admin = Admin.query.filter_by(username='admin').first()
-            if not admin:
-                admin = Admin(username='admin')
-                admin.set_password('admin123')
-                db.session.add(admin)
-                db.session.commit()
-                print('Admin user created successfully')
-        except Exception as e:
-            print(f'Admin creation skipped: {e}')
+        admin = Admin.query.filter_by(username='admin').first()
+        if not admin:
+            admin = Admin(username='admin')
+            admin.set_password('admin123')
+            db.session.add(admin)
+            db.session.commit()
+            print('Admin user created')
 except Exception as e:
-    print(f'Database initialization skipped: {e}')
-    # App will continue to run, but database features may not work
-        db.session.add(admin)
-        db.session.commit()
-        print('Admin user created (username: admin, password: admin123)')
+    print(f'Database initialization: {e}')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5000)

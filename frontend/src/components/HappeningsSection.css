@@ -1,0 +1,88 @@
+.happenings-section {
+  padding: 4rem 2rem;
+  background: white;
+}
+
+.happenings-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.happenings-container h2 {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 3rem;
+  color: black;
+}
+
+.happenings-swiper {
+  margin-bottom: 2rem;
+}
+
+.happening-card {
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.happening-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.happening-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.happening-content {
+  padding: 1.5rem;
+}
+
+.happening-content h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.happening-content p {
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.swiper-navigation {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.swiper-navigation button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #1f2937;
+  background: white;
+  color: #1f2937;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-navigation button:hover {
+  background: #1f2937;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .happenings-container h2 {
+    font-size: 2rem;
+  }
+}

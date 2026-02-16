@@ -1,8 +1,0 @@
-backend/
-templates/
-static/
-instance/
-*.py
-*.pyc
-__pycache__/
-.venv/
