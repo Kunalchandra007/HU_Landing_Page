@@ -26,13 +26,24 @@ app.config.from_object(Config)
 
 # Session configuration for CORS
 app.config['SESSION_COOKIE_SAMESITE'] = 'None'
-app.config['SESSION_COOKIE_SECURE'] = False  # Set to True in production with HTTPS
+app.config['SESSION_COOKIE_SECURE'] = True  # Required for HTTPS
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 
 # Enable CORS for React frontend
 CORS(app, resources={
     r"/api/*": {
-        "origins": ["http://localhost:3000", "https://*.vercel.app", "https://*.railway.app", "https://*.up.railway.app"],
+        "origins": [
+            "http://localhost:3000",
+            "https://hu-final.vercel.app",
+            "https://*.vercel.app",
+            "https://*.railway.app",
+            "https://*.up.railway.app"
+        ],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"],
+        "supports_credentials": True
+    }
+})
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization"],
         "supports_credentials": True
