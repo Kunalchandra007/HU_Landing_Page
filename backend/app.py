@@ -5,8 +5,8 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 from werkzeug.utils import secure_filename
 import os
 from datetime import datetime
-from config import Config
-from models import db, Admin, Event, Happening, Glimpse
+from backend.config import Config
+from backend.models import db, Admin, Event, Happening, Glimpse
 
 # Initialize Flask API application
 # Set static folder to serve React build
