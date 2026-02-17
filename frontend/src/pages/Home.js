@@ -24,10 +24,13 @@ function Home() {
           getEvents(),
           getHappenings()
         ]);
-        setEvents(eventsData);
-        setHappenings(happeningsData);
+        setEvents(Array.isArray(eventsData) ? eventsData : []);
+        setHappenings(Array.isArray(happeningsData) ? happeningsData : []);
       } catch (error) {
         console.error('Error fetching data:', error);
+        // Ensure arrays are set even on error
+        setEvents([]);
+        setHappenings([]);
       } finally {
         setLoading(false);
       }

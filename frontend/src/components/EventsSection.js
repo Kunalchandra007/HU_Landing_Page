@@ -37,7 +37,7 @@ function EventsSection({ events }) {
     }
   ];
 
-  const displayEvents = events && events.length > 0 ? events : defaultEvents;
+  const displayEvents = Array.isArray(events) && events.length > 0 ? events : defaultEvents;
 
   const handlePrev = () => {
     setCurrentIndex((prev) => {

@@ -29,7 +29,7 @@ function HappeningsSection({ happenings }) {
     }
   ];
 
-  const displayHappenings = happenings && happenings.length > 0 ? happenings : defaultHappenings;
+  const displayHappenings = Array.isArray(happenings) && happenings.length > 0 ? happenings : defaultHappenings;
 
   return (
     <section className="happenings-section">
