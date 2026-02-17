@@ -20,5 +20,5 @@ RUN mkdir -p backend/instance
 # Expose port
 EXPOSE 8080
 
-# Start command with shell to expand PORT variable
-CMD ["sh", "-c", "gunicorn -w 4 -b 0.0.0.0:${PORT:-8080} backend.app:app"]
+# Start command - use exec form with bash
+CMD ["bash", "-c", "gunicorn -w 4 -b 0.0.0.0:${PORT:-8080} backend.app:app"]
