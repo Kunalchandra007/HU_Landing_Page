@@ -1,8 +1,11 @@
 [phases.setup]
-nixPkgs = ["python311"]
+aptPkgs = ["postgresql-client", "libpq-dev"]
 
 [phases.install]
-cmds = ["pip install -r backend/requirements.txt"]
+cmds = [
+  "python -m venv /app/.venv",
+  "pip install -r requirements.txt"
+]
 
 [start]
-cmd = "gunicorn -w 4 -b 0.0.0.0:$PORT backend.app:app"
+cmd = "gunicorn --chdir backend app:app"
