@@ -8,4 +8,4 @@ cmds = [
 ]
 
 [start]
-cmd = "gunicorn --chdir backend app:app"
+cmd = "cd backend && gunicorn app:app --bind 0.0.0.0:$PORT"
