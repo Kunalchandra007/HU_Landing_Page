@@ -68,11 +68,6 @@
   padding-bottom: 50px;
 }
 
-.alumni-swiper .swiper-slide {
-  height: auto;
-  display: flex;
-}
-
 .alumni-card {
   background: white;
   border-radius: 20px;
@@ -80,11 +75,9 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   height: 100%;
-  min-height: 400px;
   display: flex;
   flex-direction: column;
   border: 2px solid transparent;
-  width: 100%;
 }
 
 .alumni-card:hover {
@@ -137,9 +130,6 @@
 .alumni-card-body {
   flex: 1;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .alumni-position {
