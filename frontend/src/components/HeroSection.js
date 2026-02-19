@@ -83,9 +83,6 @@ function HeroSection() {
       <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
         <div className="mobile-menu-header">
           <h3>Menu</h3>
-          <button className="close-btn" onClick={closeMobileMenu} aria-label="Close menu">
-            ×
-          </button>
         </div>
         <nav className="mobile-menu-nav">
           <a href="#about" className="mobile-nav-link" onClick={closeMobileMenu}>
