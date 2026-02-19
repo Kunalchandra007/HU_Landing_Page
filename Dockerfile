@@ -2,9 +2,9 @@
 
 WORKDIR /app
 
+# Install minimal system deps (libpq5 is the runtime library for psycopg2-binary)
 RUN apt-get update && apt-get install -y \
-    gcc \
-    libpq-dev \
+    libpq5 \
     && rm -rf /var/lib/apt/lists/*
 
 COPY backend/ /app/
