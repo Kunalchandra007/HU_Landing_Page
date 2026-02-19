@@ -1,0 +1,3 @@
+# Force Railway to use Dockerfile instead of nixpacks
+# by ignoring nixpacks.toml
+nixpacks.toml
