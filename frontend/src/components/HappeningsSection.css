@@ -47,6 +47,16 @@
   display: block;
 }
 
+/* Hide broken image icon */
+.happening-card img::before {
+  content: '';
+  display: none;
+}
+
+.happening-card img[alt]::after {
+  display: none;
+}
+
 .happening-content {
   padding: 1.5rem;
   flex: 1;

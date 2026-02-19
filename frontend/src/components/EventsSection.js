@@ -12,7 +12,7 @@ function EventsSection({ events }) {
       title: 'DJ Night',
       description: "let's groove to music and break the floor. This message is for all come and lets slay the dance the moves on the floor together and make this valentine dreamy.",
       event_date: '2026-02-14',
-      image_path: '/images/djnight.jpeg'
+      image_path: '/images/rampwalk.jpeg'
     },
     {
       id: 2,

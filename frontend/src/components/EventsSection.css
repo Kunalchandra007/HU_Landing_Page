@@ -56,6 +56,21 @@
   z-index: 1;
 }
 
+/* Hide broken image icon */
+.event-image-wrapper img::before {
+  content: '';
+  display: none;
+}
+
+.event-image-wrapper img[alt]::after {
+  display: none;
+}
+
+/* Fallback background for broken images */
+.event-image-wrapper img[src*="djnight"] {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
 .event-date-badge {
   position: absolute;
   top: 15px;

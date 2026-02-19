@@ -13,7 +13,7 @@ function HappeningsSection({ happenings }) {
       id: 1,
       title: 'Campus Placement Drive by ROVO AUTOMATIONS',
       description: 'Haridwar University, Roorkee proudly hosted a Campus Placement Drive by ROVO Automation offering students a valuable opportunity to begin their professional journey with a global organization. The recruitment process witnessed enthusiastic participation from students across various disciplines.',
-      image_path: 'images/mou1.jpeg'
+      image_path: 'images/gueston14.jpeg'
     },
     {
       id: 2,
