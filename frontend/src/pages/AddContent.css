@@ -217,3 +217,114 @@
     padding: 10px 12px;
   }
 }
+
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .add-content-page {
+    padding: 20px 15px;
+  }
+
+  .add-content-container {
+    padding: 25px 20px;
+  }
+
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .back-btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+
+  .form-group small {
+    font-size: 0.8rem;
+  }
+
+  .image-preview {
+    height: 180px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cancel-btn,
+  .submit-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-content-page {
+    padding: 15px 10px;
+  }
+
+  .add-content-container {
+    padding: 20px 15px;
+  }
+
+  .page-header {
+    margin-bottom: 20px;
+  }
+
+  .page-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .back-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+
+  .form-group small {
+    font-size: 0.75rem;
+  }
+
+  .image-preview {
+    height: 150px;
+  }
+
+  .cancel-btn,
+  .submit-btn {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .error-message,
+  .success-message {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+}
